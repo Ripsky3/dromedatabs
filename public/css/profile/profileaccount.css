@@ -1,0 +1,8 @@
+.main-info-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.invisble {
+    display: none;
+}

@@ -1,0 +1,24 @@
+.profile-options {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0 1rem 0;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+
+.profile-option {
+    text-decoration: none;
+    color: black;
+}
+
+.profile-options a:hover {
+    text-decoration-line: underline;
+    text-decoration-color: #1c1c1c;
+    text-decoration-thickness: 1px;
+
+}

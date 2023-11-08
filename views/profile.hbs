@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <link rel="stylesheet" href="../css/universal.css">
+    <link rel="stylesheet" href="../css/display.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/forms/itemform.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+        <header class="header">
+          <h3><a class="header-title" href="">Nile</a></h3>
+          <ul class="header-options">
+              <a class="profile-link" href="">Go Home</a>
+              <button class="signout-button">Sign Out</button>
+          </ul>
+      </header>
+
+      <div class="profile-options">
+        <a class="profile-option" href="">Activity</a>
+        <a class="profile-option" href="">Meses</a>
+        <a class="profile-option" href="">Account</a>
+      </div>
+
+      <div class="main">
+        <div class="main-options">
+          <a href="" class="main-option">Summary</a>
+          <a href="" class="main-option">Selling</a>
+        </div>
+        <div class="main-display">
+
+        </div>
+      </div>
+
+      <form action="" class="item-form" method="POST">
+        <div class="item-wrapper">
+            <input type="file" accept="image/png, image/gif, image/jpeg" class="item-image-input">
+        </div>
+        <div class="item-wrapper">
+            <label for="itemTitle" class="item-title-label">Item Title: </label>
+            <input name="itemTitle" type="text" class="item-title-input">
+        </div>
+        <div class="item-wrapper">
+            <label for="itemDescription" class="item-description-label">Item Description: </label>
+            <input name="itemDescription" type="text" class="item-description-input">
+        </div>
+        <div class="item-wrapper">
+            <label for="itemPrice" class="item-price-label">Item Price: </label>
+            <input name="itemPrice" type="text" class="item-price-input">
+        </div>
+        <button class="item-list-button" type="submit">List Item</button>
+      </form>
+
+    </div>
+    
+    <script src="/js/homelink.js"></script>
+    <script src="/js/home/hometitle.js"></script>
+    <script src="/js/signout.js"></script>
+  </body>
+</html>

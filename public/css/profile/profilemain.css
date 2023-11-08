@@ -1,0 +1,14 @@
+.main {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.main-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-options a {
+    text-decoration: none;
+    color: black;
+}

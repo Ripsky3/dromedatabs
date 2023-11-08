@@ -1,0 +1,29 @@
+.useritem-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.useritem-div h3 {
+    font-size: 1.1;
+}
+
+.useritem-div p {
+    font-size: .8;
+}
+
+.useritem-delete-button {
+    margin: 0;
+    padding: 1rem;
+    background-color: rgb(60, 108, 249);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    
+}
+
+.items-display-home {
+    margin-top: 30rem;
+}

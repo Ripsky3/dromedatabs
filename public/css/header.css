@@ -1,0 +1,98 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1c1c1c;
+    padding: 1rem;
+    color: white;
+}
+
+.header-title {
+    color: white;
+    text-decoration: none;
+}
+
+.header-options {
+    display: flex;
+}
+
+.header-option {
+    list-style: none;
+}
+
+.header-option-sign-in {
+    text-decoration: none;
+    color: white;
+    padding: 0.3rem;
+    margin: 0 0.1rem;
+}
+
+.header-option-sign-up {
+    text-decoration: none;
+    color: white;
+    padding: 0.3rem;
+    margin: 0 0.1rem;
+}
+
+.header-list-link:hover {
+    border: 0.1rem solid white;
+}
+
+.search-box {
+
+}
+
+.header-search-box-input {
+    padding: 1rem;
+    width: 50rem;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+}
+
+.header-search-box-input ::selection {
+    border: 0.1rem solid rgb(60, 108, 249);
+    
+}
+
+.header-search-box-search-button {
+    margin: 0;
+    padding: 1rem;
+    background-color: rgb(60, 108, 249);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    cursor: pointer;
+}
+
+.profile-link {
+    margin: 0;
+    padding: 1rem;
+    background-color: rgb(60, 108, 249);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+.home-link {
+    margin: 0 0.5rem;
+    padding: 1rem;
+    background-color: rgb(60, 108, 249);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.signout-button {
+    margin: 0;
+    padding: 1rem;
+    background-color: rgb(60, 108, 249);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    cursor: pointer;
+}
