@@ -127,7 +127,7 @@ async function createItemsTags(items) {
         let itemName = document.createElement("a");
         itemName.innerHTML = items[i].name;
         itemName.classList.add("item-name")
-        itemName.href = "/item/" + items[i].name + "/" + getToken();
+        itemName.href = "/item/" + items[i]._id + "/" + getToken();
         let itemDescription = document.createElement("p");
         itemDescription.innerHTML = items[i].description;
         let itemPrice = document.createElement("h3");

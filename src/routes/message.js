@@ -20,17 +20,17 @@ router.get("/profile/messages/trash/:token", auth, async (req, res) => {
     res.render("profilemessagestrash");
 })
 
-router.get("/seller/message/:itemname/:token", auth, async (req, res) => {
+router.get("/seller/message/:item_id/:token", auth, async (req, res) => {
     res.render("profilesellermessage");
 })
 
-router.get("/sellernoauth/message/:itemname", async (req, res) => { ///
+router.get("/sellernoauth/message/:item_id", async (req, res) => { ///
     res.render("profilesellermessagenoauth");
 })
 
-router.post("/seller/message/:itemname/:token", auth, async (req, res) => {
+router.post("/seller/message/:item_id/:token", auth, async (req, res) => {
     try {
-        const item = await Item.find({name: req.params.itemname});
+        const item = await Item.find({_id: req.params.item_id});
         const message = new Message({
             message: req.body.message,
             receiver: item[0].username,

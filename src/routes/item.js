@@ -85,27 +85,27 @@ router.get("/getuseritems/:token", auth, async (req, res) => {
     }
 })
 
-router.get("/getitem/:itemname", async (req, res) => {
+router.get("/getitem/:item_id", async (req, res) => {
     try {
-        const items = await Item.find({name: req.params.itemname});
+        const items = await Item.find({_id: req.params.item_id});
         res.send(items);
     } catch(e) {
         res.send(e.message);
     }
 })
 
-router.get("/getitem/:itemname/:token", auth, async (req, res) => {
+router.get("/getitem/:item_id/:token", auth, async (req, res) => {
     try {
-        const items = await Item.find({name: req.params.itemname});
+        const items = await Item.find({_id: req.params.item_id});
         res.send(items);
     } catch(e) {
         res.send(e.message);
     }
 })
 
-router.delete("/deleteuseritem/:itemname/:token", auth, async (req, res) => {
+router.delete("/deleteuseritem/:item_id/:token", auth, async (req, res) => {
     try {
-        await Item.findOneAndDelete({username: req.user.name, name: req.params.itemname});
+        await Item.findOneAndDelete({username: req.user.name, _id: req.params.item_id});
         res.send(req.user.name)
     } catch(e) {
         res.send(e.message);
@@ -120,21 +120,21 @@ router.get("/itemsearchguest/:searchinput", async (req, res) => {
     res.render("itemsearchguest");
 })
 
-router.get("/item/:itemname", async (req, res) => {
+router.get("/item/:item_id", async (req, res) => {
     res.render("itemnoauth");
 })
 
-router.get("/item/:itemname/:token", auth, async (req, res) => {
+router.get("/item/:item_id/:token", auth, async (req, res) => {
     res.render("item");
 })
 
-router.get("/itembuy/:itemname/:token", auth, async (req, res) => {
+router.get("/itembuy/:item_id/:token", auth, async (req, res) => {
     try {
         /*const item = await Item.findOneAndUpdate({name: req.params.itemname});
         if (req.user.name == item.username) {
             throw new Error("You can't buy your own item");
         }*/
-        const itemUpdate = await Item.findOneAndUpdate({name: req.params.itemname}, {purchased: true, purchaseduser: req.user.name});
+        const itemUpdate = await Item.findOneAndUpdate({_id: req.params.item_id}, {purchased: true, purchaseduser: req.user.name});
         await itemUpdate.save();
         res.render("purchaseditem");
     } catch(e) {

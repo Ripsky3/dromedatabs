@@ -24,19 +24,23 @@ async function getUserItems() {
     return response
 }
 
-function createUserItemsTags(userItems) {
+async function createUserItemsTags(userItems) {
     for (let i = 0; i < userItems.length; i++) {
         if (userItems[i].purchased == false) {
             let userItemDiv = document.createElement("div");
 
-            //Beginning
-            let userItemImage = document.createElement("img");
+            let itemImage = document.createElement("img");
+            itemImage = await getItemImage(userItems[i]._id).then(res => {
+                itemImage.src = "data:image/jpg;base64," + res;
+                itemImage.classList.add("item-image");
+                userItemDiv.appendChild(itemImage);
+            })
 
             //Middle
             let userItemsWrapper = document.createElement("div");
             let userItemName = document.createElement("a");
             userItemName.innerHTML = userItems[i].name;
-            userItemName.href = "/item/" + userItems[i].name + "/" + getToken();
+            userItemName.href = "/item/" + userItems[i]._id + "/" + getToken();
             let userItemDescription = document.createElement("p");
             userItemDescription.innerHTML = userItems[i].description;
             let userItemPrice = document.createElement("h3");
@@ -44,8 +48,9 @@ function createUserItemsTags(userItems) {
             userItemsWrapper.appendChild(userItemName);
             userItemsWrapper.appendChild(userItemDescription);
             userItemsWrapper.appendChild(userItemPrice);
+            userItemsWrapper.classList.add("useritem-wrapper");
 
-            userItemDiv.appendChild(userItemImage);
+
             userItemDiv.appendChild(userItemsWrapper);
 
             userItemDiv.classList.add("useritem-div");
@@ -66,6 +71,19 @@ async function deleteUserItem(itemName) {
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' }
     }).then(res => res.json());
+    return response
+}
+
+async function getItemImage(itemId) {
+    const response = await fetch("/getitemimage/" + itemId , {
+        method: 'GET',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' }
+    }) // output the status and return response
+    .then(response => response.text()) // send response body to next then chain
+    .then(body => {
+        return body;
+    } )
     return response
 }
 

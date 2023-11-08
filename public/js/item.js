@@ -5,7 +5,7 @@ const itemDescription = document.querySelector(".item-description");
 const itemBuy = document.querySelector(".item-buy");
 
 async function getItem() {
-    const response = await fetch("/getitem/" + getItemName() + "/" + getToken(), {
+    const response = await fetch("/getitem/" + getItem_Id() + "/" + getToken(), {
         method: 'GET',
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' }
@@ -17,7 +17,7 @@ function getToken() {
     return window.location.href.split("/")[window.location.href.split("/").length - 1];
 }
 
-function getItemName() {
+function getItem_Id() {
     return window.location.href.split("/")[window.location.href.split("/").length - 2];
 }
 
@@ -26,7 +26,7 @@ function nameItemTags(item) {
     itemDescription.innerHTML = item[0].description;
     itemPrice.innerHTML = item[0].price;
     itemUserLink.innerHTML = item[0].username
-    itemUserLink.href = "/seller/" + getItemName() + "/" + getToken();
+    itemUserLink.href = "/seller/" + getItem_Id() + "/" + getToken();
 }
 
 itemBuy.addEventListener("click", (e) => {
@@ -54,7 +54,7 @@ async function getItemInfo() {
     if (item[0].username == user.name) {
         alert("You can't buy your own item");
     } else {
-        window.location.href = "/itembuy/" + getItemName() + "/" + getToken();
+        window.location.href = "/itembuy/" + getItem_Id() + "/" + getToken();
     }
 }
 

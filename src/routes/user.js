@@ -113,23 +113,23 @@ router.get("/profile/account/:token", auth, async (req, res) => {
     res.render("profileaccount");
 })
 
-router.get("/profileitem/:itemname/:token", auth, async (req, res) => {
+router.get("/profileitem/:item_id/:token", auth, async (req, res) => {
     res.render("profileitem");
 })
 
-router.get("/seller/:itemname", async (req, res) => {
+router.get("/seller/:item_id", async (req, res) => {
     res.render("profilesellernoauth");
 })
 
-router.get("/seller/:itemname/:token", auth, async (req, res) => {
+router.get("/seller/:item_id/:token", auth, async (req, res) => {
     res.render("profileseller");
 })
 
-router.get("/sellernoauth/rate/:itemname", async (req, res) => { ///
+router.get("/sellernoauth/rate/:item_id", async (req, res) => { ///
     res.render("profilesellerrate");
 })
 
-router.get("/seller/rate/:itemname/:token", auth, async (req, res) => {
+router.get("/seller/rate/:item_id/:token", auth, async (req, res) => {
     res.render("profilesellerrate");
 })
 

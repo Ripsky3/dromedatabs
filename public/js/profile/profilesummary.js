@@ -13,10 +13,6 @@ function getToken() {
 
 const itemDisplay = document.querySelector(".items-display");
 
-function getToken() {
-    return window.location.href.split("/")[window.location.href.split("/").length - 1];
-}
-
 async function getPurchasedItems() {
     const response = await fetch("/getpurchaseditems/" + getToken(), {
         method: 'GET',
@@ -43,7 +39,7 @@ async function createUserItemsTags(userItems) {
         let userItemsWrapper = document.createElement("div");
         let userItemName = document.createElement("a");
         userItemName.innerHTML = userItems[i].name;
-        userItemName.href = "/profileitem/" + userItems[i].name + "/"+ getToken();
+        userItemName.href = "/profileitem/" + userItems[i]._id + "/"+ getToken();
         let userItemDescription = document.createElement("p");
         userItemDescription.innerHTML = userItems[i].description;
         let userItemPrice = document.createElement("h3");
@@ -77,6 +73,7 @@ async function getItemImage(itemId) {
 }
 
 getPurchasedItems().then(purchasedItems => {
+    console.log(purchasedItems)
     createUserItemsTags(purchasedItems);
 }).catch(e => {
     console.log(e)

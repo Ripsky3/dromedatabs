@@ -52,7 +52,7 @@ async function createUserItemsTags(userItems) {
         userItemDeleteButton.classList.add("useritem-delete-button");
         userItemDeleteButton.addEventListener("click", () => {
             itemsDisplay.removeChild(userItemDeleteButton.parentElement);
-            deleteUserItem(userItems[i].name);
+            deleteUserItem(userItems[i]._id);
         })
 
         userItemDiv.appendChild(userItemsWrapper);
@@ -81,8 +81,8 @@ async function getItemImage(itemId) {
 }
 
 
-async function deleteUserItem(itemName) {
-    const response = await fetch("/deleteuseritem/" + itemName + "/" + getToken(), {
+async function deleteUserItem(item_id) {
+    const response = await fetch("/deleteuseritem/" + item_id + "/" + getToken(), {
         method: 'DELETE',
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' }
