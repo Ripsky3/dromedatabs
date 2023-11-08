@@ -166,13 +166,17 @@ getNonPurchasedItems().then(items => {
     alert(e.message);
 })
 
-/*async function buyItem(itemName) {
-    console.log(itemName)
-    const response = await fetch("/itembuy/" + itemName + "/" + getToken(), {
-        method: 'DELETE',
+async function updateRecentSearch(recentSearch) {
+    const response = await fetch("/updaterecentsearch/" + recentSearch + "/" + getToken(), {
+        method: 'GET',
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' }
     }).then(res => res.json());
     return response
 }
-*/
+
+updateRecentSearch(getSearchedInput()).then(res => {
+    if (res.error) {
+        alert(res.error);
+    }
+})

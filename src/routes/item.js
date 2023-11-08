@@ -207,6 +207,17 @@ function _arrayBufferToBase64( buffer ) {
     return window.btoa( binary );
 }
 
+router.get("/getuserpersonalizeditems/:token", auth, async (req, res) => {
+    try {
+        const item = await Item.find({});
+        res.send(item)
+        
+    } catch (e) {   
+        res.status(404).send("can't find");
+    }
+})
+
+
 module.exports = {
     itemRouter: router
 }

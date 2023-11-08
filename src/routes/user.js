@@ -191,7 +191,15 @@ router.get("/publicprofileratings/:username/:token", auth, async (req, res) => {
     res.render("publicprofileratings");
 })
 
-
+router.get("/updaterecentsearch/:recentsearch/:token", auth, async (req, res) => {
+    try {
+        const user = await User.findOneAndUpdate({name: req.user.name}, {recentsearch: req.params.recentsearch});
+        user.save();
+        res.send(user);
+    } catch (e) {   
+        res.status(404).send({error: "can't find user"});
+    }
+})
 
 module.exports = {
     userRouter: router
