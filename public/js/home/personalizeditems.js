@@ -1,4 +1,6 @@
 const personalizedItemsDisplayGrid = document.querySelector(".personalized-items-display-grid");
+const personalizedItemsDisplay = document.querySelector(".personalized-items-display");
+const personalizedItemDisplayTitle = document.querySelector(".personalized-items-display-title");
 
 function getToken() {
     return window.location.href.split("/")[window.location.href.split("/").length - 1];
@@ -162,6 +164,7 @@ async function getUser() {
 }
 
 if (getToken().length > 40) {
+    personalizedItemDisplayTitle.classList.remove("invisible");
     personalizedItems();
 }
 
@@ -178,6 +181,5 @@ async function personalizedItems() {
     const nonPurchasedItems = await getNonPurchasedItems();
     const user = await getUser();
 
-    console.log(sortItems(nonPurchasedItems, user.recentsearch))
     createUserItemsTags(sortItems(nonPurchasedItems, user.recentsearch));
 }

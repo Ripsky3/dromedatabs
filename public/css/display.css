@@ -12,6 +12,7 @@
     flex-direction: column;
     justify-content: center;
     position: absolute;
+    transition: transform 1s ease-in-out;
 }
 
 .display-title {
@@ -63,12 +64,10 @@
 
 .left {
     transform: translateX(-100%);
-    transition: 1s opacity ease-in-out;
 }
 
 .right {
     transform: translateX(100%);
-    transition: 1s opacity ease-in-out;
 }
 
 .invisible {
