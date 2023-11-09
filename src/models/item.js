@@ -69,6 +69,10 @@ const itemSchema = new mongoose.Schema({
     },
     purchaseduser: {
         type: String
+    },
+    topsearch: {
+        type: Number,
+        default: 0
     }
 })
 

@@ -6,15 +6,6 @@ function getToken() {
     return window.location.href.split("/")[window.location.href.split("/").length - 1];
 }
 
-async function getUserPersonalizedItems() {
-    const response = await fetch("/getuserpersonalizeditems/" + getToken(), {
-        method: 'GET',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' }
-    }).then(res => res.json());
-    return response
-}
-
 async function createUserItemsTags(personalizedItems) {
 
     for (let i = 0; i < 4; i++) {
@@ -180,6 +171,12 @@ async function getNonPurchasedItems() {
 async function personalizedItems() {
     const nonPurchasedItems = await getNonPurchasedItems();
     const user = await getUser();
-
-    createUserItemsTags(sortItems(nonPurchasedItems, user.recentsearch));
+    personalizedItemDisplayTitle.classList.remove("invisible");
+    if (nonPurchasedItems.length < 1 ||
+        user.recentsearch == "") {
+        personalizedItemsDisplay.classList.add("invisible");
+        personalizedItemDisplayTitle.classList.add("invisible");
+    } else {
+        createUserItemsTags(sortItems(nonPurchasedItems, user.recentsearch));
+    }
 }

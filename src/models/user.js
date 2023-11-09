@@ -33,7 +33,8 @@ const userSchema = new mongoose.Schema({
         trim: true,
     },
     recentsearch: {
-        type: String
+        type: String,
+        default: ""
     },
     tokens: [{
         token: {

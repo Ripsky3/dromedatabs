@@ -1,33 +1,32 @@
-.personalized-items-display {
-    margin-top: 700px;
+.popular-items-display {
 }
 
-.personalized-items-display-grid {
+.popular-items-display-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 10px;
 }
 
-.personalizeditems-div {
+.popularitems-div {
     margin: 20px 0;
     display: flex;
     flex-direction: column;
 }
 
-.personalizeditem-image {
+.popularitem-image {
     max-width:100%;
     max-height:100%;
 }
 
-.personalizeditem-wrapper {
+.popularitem-wrapper {
     margin-left: 20px;
 }
 
-.personalizeditem-div h3 {
+.popularitem-div h3 {
     font-size: 1.1;
 }
 
-.personalizeditem-div p {
+.popularitem-div p {
     font-size: .8;
 }
 

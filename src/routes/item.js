@@ -197,6 +197,38 @@ router.get("/getitemimage/:id", async (req, res) => {
     }
 })
 
+router.patch("/updatetopsearch/:id", async (req, res) => {
+    try {
+        const item = await Item.findById(req.params.id);
+        item.topsearch += 1;
+        item.save()
+    } catch (e) {   
+        res.send({error: "Can't update top search"});
+    }
+})
+
+router.get("/getpopularitems", async (req, res) => {
+    try {
+        const items = await Item.find({});
+        for (let i = 0; i < items.length - 1; i++) {
+            let tempMax = 0;
+            let tempMaxIndex;
+            for (let j = i; j < items.length; j++) {
+                if (items[j].topsearch >= tempMax) {
+                    tempMax = items[j];
+                    tempMaxIndex = j;
+                }
+            }
+            let tempItemI = items[i]
+            items[i] = items[tempMaxIndex];
+            items[tempMaxIndex] = tempItemI;
+        }
+        res.send(items.splice(0, 4));
+    } catch (e) {   
+        res.status(404).send("can't find");
+    }
+})
+
 function _arrayBufferToBase64( buffer ) {
     var binary = '';
     var bytes = new Uint8Array( buffer );
@@ -206,17 +238,6 @@ function _arrayBufferToBase64( buffer ) {
     }
     return window.btoa( binary );
 }
-
-router.get("/getuserpersonalizeditems/:token", auth, async (req, res) => {
-    try {
-        const item = await Item.find({});
-        res.send(item)
-        
-    } catch (e) {   
-        res.status(404).send("can't find");
-    }
-})
-
 
 module.exports = {
     itemRouter: router

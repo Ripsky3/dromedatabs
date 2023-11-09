@@ -160,11 +160,14 @@ async function getItemImage(itemId) {
     return response
 }
 
-getNonPurchasedItems().then(items => {
-    createItemsTags(sortItems(items));
-}).catch(e => {
-    alert(e.message);
-})
+async function updateTopSearch(item_id) {
+    const response = await fetch("/updatetopsearch/" + item_id, {
+        method: 'PATCH',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' }
+    }).then(res => res.json());
+    return response
+}
 
 async function updateRecentSearch(recentSearch) {
     const response = await fetch("/updaterecentsearch/" + recentSearch + "/" + getToken(), {
@@ -174,6 +177,17 @@ async function updateRecentSearch(recentSearch) {
     }).then(res => res.json());
     return response
 }
+
+getNonPurchasedItems().then(items => {
+    updateTopSearch(items[0]._id).then(res => {
+        if (res.error) {
+            alert(res.error);
+        }
+    })
+    createItemsTags(sortItems(items));
+}).catch(e => {
+    alert(e.message);
+})
 
 updateRecentSearch(getSearchedInput()).then(res => {
     if (res.error) {
