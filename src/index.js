@@ -7,6 +7,7 @@ const { userRouter } = require("./routes/user");
 const { itemRouter } = require("./routes/item");
 const { messageRouter } = require("./routes/message");
 const { ratingRouter } = require("./routes/rating");
+const { buyRouter } = require("./routes/buy");
 
 const app = express();
 const port = process.env.PORT || 3000; 

@@ -1,25 +1,7 @@
-const mainDisplay = document.querySelector(".main-display");
-const activityLink = document.querySelector(".profile-option-activity");
-const messageLink = document.querySelector(".profile-option-messages");
-const accountLink = document.querySelector(".profile-option-account");
-
-activityLink.href = "/profile/activity/summary/" + getToken();
-messageLink.href = "/profile/messages/" + getToken();
-accountLink.href = "/profile/account/" + getToken();
+const itemsDisplay = document.querySelector(".items-display");
 
 function getToken() {
     return window.location.href.split("/")[window.location.href.split("/").length - 1];
-}
-
-const itemDisplay = document.querySelector(".items-display");
-
-async function getPurchasedItems() {
-    const response = await fetch("/getpurchaseditems/" + getToken(), {
-        method: 'GET',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' }
-    }).then(res => res.json());
-    return response
 }
 
 async function createUserItemsTags(userItems) {
@@ -56,7 +38,7 @@ async function createUserItemsTags(userItems) {
 }
 
 function displayUserItems(userItemsDiv) {
-    mainDisplay.appendChild(userItemsDiv);
+    itemsDisplay.appendChild(userItemsDiv);
 }
 
 async function getItemImage(itemId) {
@@ -72,8 +54,17 @@ async function getItemImage(itemId) {
     return response
 }
 
-getPurchasedItems().then(purchasedItems => {
-    createUserItemsTags(purchasedItems);
+async function getUserCartItems() {
+    const response = await fetch("/getusercartitems/" + getToken(), {
+        method: 'GET',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' }
+    }).then(res => res.json());
+    return response
+}
+
+getUserCartItems().then(userCartItems => {
+    createUserItemsTags(userCartItems);
 }).catch(e => {
-    console.log(e)
+    alert(e.error);
 })

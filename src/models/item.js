@@ -73,8 +73,19 @@ const itemSchema = new mongoose.Schema({
     topsearch: {
         type: Number,
         default: 0
-    }
+    },
+    cartusers: [{
+        cartuser: {
+            type: String
+        }
+    }]
 })
+
+itemSchema.methods.generateCartUser = async function(username)  {
+    this.cartusers.push({cartuser: username});
+    await this.save();
+    return username;
+}
 
 const Item = mongoose.model("Item", itemSchema);
 

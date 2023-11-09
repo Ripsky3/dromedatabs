@@ -109,6 +109,10 @@ router.get("/profile/activity/selling/unsold/:token", auth, async (req, res) => 
     res.render("profilesellingunsold");
 })
 
+router.get("/profile/activity/cart/:token", auth, async (req, res) => {
+    res.render("profilecart");
+})
+
 router.get("/profile/account/:token", auth, async (req, res) => {
     res.render("profileaccount");
 })

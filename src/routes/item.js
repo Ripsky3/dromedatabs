@@ -128,17 +128,18 @@ router.get("/item/:item_id/:token", auth, async (req, res) => {
     res.render("item");
 })
 
-router.get("/itembuy/:item_id/:token", auth, async (req, res) => {
+router.patch("/itemaddtocart/:item_id/:token", auth, async (req, res) => {
     try {
         /*const item = await Item.findOneAndUpdate({name: req.params.itemname});
         if (req.user.name == item.username) {
             throw new Error("You can't buy your own item");
         }*/
-        const itemUpdate = await Item.findOneAndUpdate({_id: req.params.item_id}, {purchased: true, purchaseduser: req.user.name});
-        await itemUpdate.save();
-        res.render("purchaseditem");
+        const item = await Item.findOne({_id: req.params.item_id});
+        const cartuser = await item.generateCartUser(req.user.name);
+        await item.save();
+        res.send({cartuser});
     } catch(e) {
-        res.send(e.message);
+        res.send({error: "Could not add to cart"});
     }
 })
 
@@ -197,6 +198,16 @@ router.get("/getitemimage/:id", async (req, res) => {
     }
 })
 
+function _arrayBufferToBase64( buffer ) {
+    var binary = '';
+    var bytes = new Uint8Array( buffer );
+    var len = bytes.byteLength;
+    for (var i = 0; i < len; i++) {
+        binary += String.fromCharCode( bytes[ i ] );
+    }
+    return window.btoa( binary );
+}
+
 router.patch("/updatetopsearch/:id", async (req, res) => {
     try {
         const item = await Item.findById(req.params.id);
@@ -229,15 +240,23 @@ router.get("/getpopularitems", async (req, res) => {
     }
 })
 
-function _arrayBufferToBase64( buffer ) {
-    var binary = '';
-    var bytes = new Uint8Array( buffer );
-    var len = bytes.byteLength;
-    for (var i = 0; i < len; i++) {
-        binary += String.fromCharCode( bytes[ i ] );
+router.get("/getusercartitems/:token", auth, async (req, res) => {
+    try {
+        const items = await Item.find({});
+        const filteredItems = [];
+        for (let i = 0; i < items.length; i++) {
+            for (let j = 0; j < items[i].cartusers.length; j++) {
+                console.log(items[i].cartusers[j])
+                if (items[i].cartusers[j].cartuser == req.user.name) {
+                    filteredItems.push(items[i]);
+                }
+            }
+        }
+        res.send(filteredItems);
+    } catch (e) {   
+        res.send({error: "Could not get user cart items"});
     }
-    return window.btoa( binary );
-}
+})
 
 module.exports = {
     itemRouter: router

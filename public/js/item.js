@@ -2,7 +2,7 @@ const itemUserLink = document.querySelector(".item-user-link");
 const itemName = document.querySelector(".item-name");
 const itemPrice = document.querySelector(".item-price");
 const itemDescription = document.querySelector(".item-description");
-const itemBuy = document.querySelector(".item-buy");
+const itemAddToCart = document.querySelector(".item-add-to-cart");
 
 async function getItem() {
     const response = await fetch("/getitem/" + getItem_Id() + "/" + getToken(), {
@@ -29,13 +29,12 @@ function nameItemTags(item) {
     itemUserLink.href = "/seller/" + getItem_Id() + "/" + getToken();
 }
 
-itemBuy.addEventListener("click", (e) => {
+itemAddToCart.addEventListener("click", (e) => {
     e.preventDefault();
     getItemInfo();
 })
 
 if (getToken().length > 30) {
-    console.log("GetToken greater than 30")
     getItem().then(item => {
         nameItemTags(item);
     })
@@ -52,10 +51,25 @@ async function getItemInfo() {
     const item = await getItem();
     const user = await getUser();
     if (item[0].username == user.name) {
-        alert("You can't buy your own item");
+        alert("You can't add your own item to your cart");
     } else {
-        window.location.href = "/itembuy/" + getItem_Id() + "/" + getToken();
+        updateCartUser().then(res => {
+            if (res.error) {
+                alert(res.error);
+            } else {
+                window.location.href = "/profile/activity/summary/" + getToken();
+            }
+        })
     }
+}
+
+async function updateCartUser() {
+    const response = await fetch("/itemaddtocart/" + getItem_Id() + "/" + getToken(), {
+        method: 'PATCH',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' }
+    }).then(res => res.json());
+    return response
 }
 
 async function getUser() {
