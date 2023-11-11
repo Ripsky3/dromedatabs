@@ -36,7 +36,7 @@ async function createUserItemsTags(userItems) {
             let userItemsWrapper = document.createElement("div");
             let userItemName = document.createElement("a");
             userItemName.innerHTML = userItems[i].name;
-            userItemName.href = "/signup";
+            userItemName.href = "/item/" + userItems[i]._id;
             let userItemDescription = document.createElement("p");
             userItemDescription.innerHTML = userItems[i].description;
             let userItemPrice = document.createElement("h3");

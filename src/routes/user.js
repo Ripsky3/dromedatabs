@@ -1,6 +1,7 @@
 const express = require("express");
 const router = new express.Router();
 const User = require("../models/user");
+const Item = require("../models/item");
 const auth = require("../middleware/auth")
 
 
@@ -33,7 +34,8 @@ router.post("/createuser", async (req, res) => {
     const user = new User({
         name: req.body.username,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        address: {latitude: req.body.latitude, longitude: req.body.longitude}
     }) 
     
     try {
@@ -105,12 +107,16 @@ router.get("/profile/activity/selling/sold/:token", auth, async (req, res) => {
     res.render("profilesellingsold");
 })
 
-router.get("/profile/activity/selling/unsold/:token", auth, async (req, res) => {
-    res.render("profilesellingunsold");
+router.get("/profile/activity/selling/buyerreceived/:token", auth, async (req, res) => {
+    res.render("profilesellingbuyerreceived");
 })
 
 router.get("/profile/activity/cart/:token", auth, async (req, res) => {
     res.render("profilecart");
+})
+
+router.get("/profile/activity/cart/checkout/:token", auth, async (req, res) => {
+    res.render("profilecheckout");
 })
 
 router.get("/profile/account/:token", auth, async (req, res) => {
@@ -202,6 +208,34 @@ router.get("/updaterecentsearch/:recentsearch/:token", auth, async (req, res) =>
         res.send(user);
     } catch (e) {   
         res.status(404).send({error: "can't find user"});
+    }
+})
+
+router.patch("/updateuseraddress/:token", auth, async (req, res) => {
+    try {
+        const user = await User.findOneAndUpdate({name: req.user.name}, {address: {latitude: req.body.latitude, longitude: req.body.longitude}});
+        user.save();
+        res.send(user);
+    } catch (e) {   
+        res.status(404).send({error: "can't find user"});
+    }
+})
+
+router.get("/shippinglabel/:token", auth, async (req, res) => {
+    res.render("shippinglabel");
+})
+
+router.get("/getitempurchaseduser/:item_id/:token", auth, async (req, res) => {
+    try {
+        const users = await User.find({});
+        const item = await Item.findById(req.params.item_id);
+        for (let i = 0; i < users.length; i++) {
+            if (users[i].name == item.purchaseduser) {
+                res.send(users[i]);
+            }
+        }
+    } catch(e) {
+        res.send({error: "Could not find user"});
     }
 })
 

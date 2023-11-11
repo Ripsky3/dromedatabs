@@ -1,6 +1,7 @@
 const express = require("express");
 const router = new express.Router();
 const Item = require("../models/item");
+const User = require("../models/user");
 const auth = require("../middleware/auth")
 const multer = require("multer");
 
@@ -28,6 +29,27 @@ router.post("/createitem/:token", auth, upload.single("itemFile"), async (req, r
         if (item.price.slice(0, 1) != "$") {
             item.price = "$" + item.price;
         }
+        let noDot = true;
+        for (let i = 0; i < item.price.length; i++) {
+            if (item.price.slice(i, i + 1) == ".") {
+                let cents = "";
+                cents += item.price.slice(1, i);
+                if (item.price.length - i == 3) {
+                    cents += item.price.slice(i + 1);
+                } else if (item.price.length - i == 2) {
+                    cents += item.price.slice(i + 1) + "0";
+                }
+                
+                
+                item.priceincents = parseInt(cents);
+                noDot = false;
+            }
+        }
+
+        if (noDot) {
+            item.priceincents = parseInt(item.price.slice(1)) * 100;
+        }
+
         await item.save();
         res.redirect("/profile/activity/summary/" + req.params.token);
     } catch (e) {
@@ -155,7 +177,7 @@ router.get("/getuseractiveitems/:token", auth, async (req, res) => {
 
 router.get("/getusersolditems/:token", auth, async (req, res) => {
     try {
-        const items = await Item.find({username: req.user.name, purchased: true});
+        const items = await Item.find({username: req.user.name, purchased: true, received: false});
         res.send(items);
     } catch(e) {
         res.send(e.message);
@@ -165,6 +187,15 @@ router.get("/getusersolditems/:token", auth, async (req, res) => {
 router.get("/getuserunsolditems/:token", auth, async (req, res) => {
     try {  
         const items = await Item.find({username: req.user.name, purchased: false});
+        res.send(items);
+    } catch(e) {
+        res.send(e.message);
+    }
+})
+
+router.get("/getbuyerreceiveditems/:token", auth, async (req, res) => {
+    try {  
+        const items = await Item.find({username: req.user.name, purchased: true, received: true});
         res.send(items);
     } catch(e) {
         res.send(e.message);
@@ -246,8 +277,8 @@ router.get("/getusercartitems/:token", auth, async (req, res) => {
         const filteredItems = [];
         for (let i = 0; i < items.length; i++) {
             for (let j = 0; j < items[i].cartusers.length; j++) {
-                console.log(items[i].cartusers[j])
-                if (items[i].cartusers[j].cartuser == req.user.name) {
+                if (items[i].cartusers[j].cartuser == req.user.name &&
+                    items[i].purchased === false) {
                     filteredItems.push(items[i]);
                 }
             }
@@ -255,6 +286,39 @@ router.get("/getusercartitems/:token", auth, async (req, res) => {
         res.send(filteredItems);
     } catch (e) {   
         res.send({error: "Could not get user cart items"});
+    }
+})
+
+router.get("/updatepurchaseditem/:item_id/:token", auth, async (req, res) => {
+    try {
+        const user = await User.find({  });
+        let split_id_array = req.params.item_id.split("-");
+        for (let i = 0; i < split_id_array.length - 1; i++) {
+            const item = await Item.findById(split_id_array[i]);
+            for (let j = 0; j < user.length; j++) {
+                for (let x = 0; x < user[j].tokens.length; x++) {
+                    if (user[j].tokens[x].token == req.params.token) {
+                        item.purchaseduser = user[j].name;
+                        item.purchased = true;
+                        item.save();
+                    }
+                }   
+            }
+        }
+        res.redirect("/profile/activity/summary/" + req.params.token);
+    } catch (e) {   
+        res.send({error: e});
+    }
+})
+
+router.patch("/updateitemreceivedtotrue/:item_id/:token", auth, async (req, res) => {
+    try {
+        const item = await Item.findById(req.params.item_id);
+        item.received = true;
+        item.save();
+        res.send(item);
+    } catch (e) {   
+        res.send({error: e});
     }
 })
 

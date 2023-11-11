@@ -1,0 +1,66 @@
+.shipping-label-container {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 20px 8px;
+    border: solid black 1px;
+    border-radius: 25px;
+}
+
+.shipping-label-divider {
+    border: solid black 1px;
+    padding: 8px;
+}
+
+.shipping-label-seller-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.shipping-label-item-seller-info {
+    border: dashed solid 1px;
+}
+
+.shipping-label-item-buyer-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.shipping-label-divider {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 220px 50px;
+}
+
+.shipping-label-p {
+    font-size: 200px;
+    padding: 20px;
+    margin: 0;
+}
+
+.shipping-label-divider-divider-p {
+    padding: 20px;
+}
+
+.shipping-label-divider-divider {
+    border: solid black 1px;
+}
+
+.shipping-label-company-mail {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shipping-label-divider-divider-mail {
+    grid-column: 1 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shipping-label-barcode {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}

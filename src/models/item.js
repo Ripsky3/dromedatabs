@@ -54,6 +54,10 @@ const itemSchema = new mongoose.Schema({
             }
         }  
     },
+    priceincents: {
+        type: Number,
+        required: true
+    },
     image: {
         type: Buffer,
         required: true
@@ -78,7 +82,11 @@ const itemSchema = new mongoose.Schema({
         cartuser: {
             type: String
         }
-    }]
+    }],
+    received: {
+        type: Boolean,
+        default: false
+    }
 })
 
 itemSchema.methods.generateCartUser = async function(username)  {

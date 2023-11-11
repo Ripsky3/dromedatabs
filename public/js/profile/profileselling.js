@@ -1,5 +1,6 @@
 const listItemLink = document.querySelector(".list-item-link");
 const sellingInfoLinkActive = document.querySelector(".selling-info-link-active");
+const sellingInfoLinkBuyerReceived = document.querySelector(".selling-info-link-buyer-received");
 const sellingInfoLinkSold = document.querySelector(".selling-info-link-sold");
 const activityLink = document.querySelector(".profile-option-activity");
 const messageLink = document.querySelector(".profile-option-messages");
@@ -7,7 +8,8 @@ const accountLink = document.querySelector(".profile-option-account");
 
 let activeNum = document.querySelector(".selling-info-active-num");
 let soldNum = document.querySelector(".selling-info-sold-num");
-let totalNum = document.querySelector(".selling-info-90daytotal");
+let buyerReceivedNum = document.querySelector(".selling-info-buyer-received");
+let totalNum = document.querySelector(".selling-info-total");
 
 activityLink.href = "/profile/activity/summary/" + getToken();
 messageLink.href = "/profile/messages/" + getToken();
@@ -16,9 +18,7 @@ accountLink.href = "/profile/account/" + getToken();
 
 sellingInfoLinkActive.href = "/profile/activity/selling/active/" + getToken();
 sellingInfoLinkSold.href = "/profile/activity/selling/sold/" + getToken();
-
-sellingInfoLinkActive.href = "/profile/activity/selling/active/" + getToken();
-sellingInfoLinkSold.href = "/profile/activity/selling/sold/" + getToken();
+sellingInfoLinkBuyerReceived.href = "/profile/activity/selling/buyerreceived/" + getToken();
 
 listItemLink.href = "/profile/activity/selling/listitemform/" + getToken();
 
@@ -49,6 +49,7 @@ async function createUserItemsTags(userItems) {
         userItemImage = await getItemImage(userItems[i]._id).then(res => {
             userItemImage.src = "data:image/jpg;base64," + res;
             userItemImage.classList.add("item-image");
+            userItemImage.alt = "Image file to much memory";
             userItemDiv.appendChild(userItemImage);
         })
 
@@ -78,17 +79,24 @@ function displayUserItems(userItemsDiv) {
 function setSellingInfoNumber(userItems) {
     let activeNumCount = 0;
     let soldNumCount = 0;
+    let buyerReceivedNumCount = 0;
     let totalNumCount = parseFloat("0");
     for (let i = 0; i < userItems.length; i++) {
-        if (userItems[i].purchased == true) {
-            totalNumCount += getPrice(userItems[i].price.split(""));
+        if (userItems[i].purchased == true && userItems[i].received == false) {
             soldNumCount += 1;
+        }
+        if (userItems[i].purchased == true && userItems[i].received == true) {
+            buyerReceivedNumCount += 1;
+        }
+        if (userItems[i].purchased == true) {
+            totalNumCount += userItems[i].priceincents * .01;
         } else {
             activeNumCount += 1;
         }
     }
     activeNum.innerHTML = `${activeNumCount}`;
     soldNum.innerHTML = `${soldNumCount}`;
+    buyerReceivedNum.innerHTML = `${buyerReceivedNumCount}`;
     totalNum.innerHTML = "$" + `${totalNumCount.toString().slice(0, totalNumCount.toString().indexOf(".") + 3)}`;
 }
 

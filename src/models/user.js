@@ -41,7 +41,15 @@ const userSchema = new mongoose.Schema({
             type: String,
             required: true
         }
-    }]
+    }],
+    address: {
+        latitude: {
+            type: String
+        },
+        longitude: {
+            type: String
+        }
+    }
 })
 
 userSchema.pre("save", async function(next) {

@@ -75,6 +75,18 @@
     
 }
 
+.display-title-popular-items {
+    color: black;
+}
+
+.display-paragraph-popular-items {
+    color: black;
+}
+
+.header-search-box-search-button {
+    text-decoration: none;
+}
+
 /* Modal Functionality */
 
 .left {

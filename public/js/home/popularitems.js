@@ -24,7 +24,11 @@ async function createPopularItemsTags(popularItems) {
         let popularItemWrapper = document.createElement("div");
         let popularItemName = document.createElement("a");
         popularItemName.innerHTML = popularItems[i].name;
-        popularItemName.href = "/item/" + popularItems[i]._id + "/" + getToken();
+        if (getToken().length > 30) {
+            popularItemName.href = "/item/" + popularItems[i]._id + "/" + getToken();
+        } else {
+            popularItemName.href = "/item/" + popularItems[i]._id;
+        }
         let popularItemDescription = document.createElement("p");
         popularItemDescription.innerHTML = popularItems[i].description;
         let popularItemPrice = document.createElement("h3");

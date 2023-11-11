@@ -14,7 +14,6 @@ router.post("/ratepublicprofile/:token", auth, async (req, res) => {
         await rating.save();
         res.send(rating);
    } catch(e) {
-    console.log(e)
         res.send({error: e.message});
    }
 })

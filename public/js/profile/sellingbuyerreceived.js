@@ -1,4 +1,4 @@
-const mainDisplay = document.querySelector(".main-display");
+const itemsDisplay = document.querySelector(".items-display");
 const activityLink = document.querySelector(".profile-option-activity");
 const messageLink = document.querySelector(".profile-option-messages");
 const accountLink = document.querySelector(".profile-option-account");
@@ -11,23 +11,11 @@ function getToken() {
     return window.location.href.split("/")[window.location.href.split("/").length - 1];
 }
 
-const itemDisplay = document.querySelector(".items-display");
-
-async function getPurchasedItems() {
-    const response = await fetch("/getpurchaseditems/" + getToken(), {
-        method: 'GET',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' }
-    }).then(res => res.json());
-    return response
-}
-
 async function createUserItemsTags(userItems) {
     for (let i = 0; i < userItems.length; i++) {
         let userItemDiv = document.createElement("div");
-        userItemDiv.classList.add("useritem-div");
+        userItemDiv.classList.add("item-div");
 
-        //Beginning
         let userItemImage = document.createElement("img");
         userItemImage = await getItemImage(userItems[i]._id).then(res => {
             userItemImage.src = "data:image/jpg;base64," + res;
@@ -35,11 +23,9 @@ async function createUserItemsTags(userItems) {
             userItemDiv.appendChild(userItemImage);
         })
 
-        //Middle
         let userItemsWrapper = document.createElement("div");
-        let userItemName = document.createElement("a");
+        let userItemName = document.createElement("h3");
         userItemName.innerHTML = userItems[i].name;
-        userItemName.href = "/profileitem/" + userItems[i]._id + "/"+ getToken();
         let userItemDescription = document.createElement("p");
         userItemDescription.innerHTML = userItems[i].description;
         let userItemPrice = document.createElement("h3");
@@ -47,29 +33,17 @@ async function createUserItemsTags(userItems) {
         userItemsWrapper.appendChild(userItemName);
         userItemsWrapper.appendChild(userItemDescription);
         userItemsWrapper.appendChild(userItemPrice);
-        userItemsWrapper.classList.add("useritem-wrapper");
+        userItemsWrapper.classList.add("item-wrapper");
         userItemDiv.appendChild(userItemsWrapper);
-        if (userItems[i].received == false) {
-            let userItemsReceivedButton = document.createElement("button");
-            userItemsReceivedButton.innerHTML = "I have received the item";
-            userItemsReceivedButton.addEventListener("click", (e) => {
-                updateItemReceivedTotrue(userItems[i]._id );
-            })
-            userItemDiv.appendChild(userItemsReceivedButton);
-        } else {
-            let userItemReceived = document.createElement("h3");
-            userItemReceived.innerHTML = "Received Item";
-            userItemDiv.appendChild(userItemReceived);
-        }
-        
 
         userItemDiv.classList.add("useritem-div");
+
         displayUserItems(userItemDiv);
     }
 }
 
 function displayUserItems(userItemsDiv) {
-    mainDisplay.appendChild(userItemsDiv);
+    itemsDisplay.appendChild(userItemsDiv);
 }
 
 async function getItemImage(itemId) {
@@ -85,18 +59,19 @@ async function getItemImage(itemId) {
     return response
 }
 
-async function updateItemReceivedTotrue(item_id) {
-    const response = await fetch("/updateitemreceivedtotrue/" + item_id + "/" + getToken(), {
-        method: 'PATCH',
+async function getBuyerReceivedItems() {
+    const response = await fetch("/getbuyerreceiveditems/" + getToken(), {
+        method: 'GET',
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' }
-    }) // output the status and return response
-    .then(res => res.json());
-    return response;
+    }).then(res => res.json());
+    return response
 }
 
-getPurchasedItems().then(purchasedItems => {
-    createUserItemsTags(purchasedItems);
+
+getBuyerReceivedItems().then(buyerReceivedItems => {
+    console.log(buyerReceivedItems);
+    createUserItemsTags(buyerReceivedItems);
 }).catch(e => {
     console.log(e)
 })

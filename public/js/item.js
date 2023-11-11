@@ -50,14 +50,22 @@ if (getToken().length > 30) {
 async function getItemInfo() {
     const item = await getItem();
     const user = await getUser();
+    const updateCartUserBoolean = true;
+    for (let i = 0; i < item[0].cartusers.length; i++) {
+        if (item[0].cartusers[i].cartuser == user.name) {
+            updateCartUser = false;
+            alert("You can't add the same item to your cart twice");
+        }
+    }
     if (item[0].username == user.name) {
         alert("You can't add your own item to your cart");
-    } else {
+        
+    } else if (updateCartUserBoolean) {
         updateCartUser().then(res => {
             if (res.error) {
                 alert(res.error);
             } else {
-                window.location.href = "/profile/activity/summary/" + getToken();
+                window.location.href = "/profile/activity/cart/" + getToken();
             }
         })
     }

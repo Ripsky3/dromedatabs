@@ -1,3 +1,8 @@
 .container-wrapper {
     padding: 2rem 5rem;
 }
+
+.useritem-div {
+    display: flex;
+    justify-content: space-between;
+}

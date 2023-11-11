@@ -1,7 +1,4 @@
 const mainDisplay = document.querySelector(".main-display");
-const activityLink = document.querySelector(".profile-option-activity");
-const messageLink = document.querySelector(".profile-option-messages");
-const accountLink = document.querySelector(".profile-option-account");
 
 const username = document.querySelector(".username");
 const usernameEditButton = document.querySelector(".edit-username-info-button");
@@ -9,6 +6,7 @@ const email  = document.querySelector(".email");
 const emailEditButton = document.querySelector(".edit-email-info-button");
 const password = document.querySelector(".password");
 const passwordEditButton = document.querySelector(".edit-password-info-button");
+const addressLink = document.querySelector(".address-link");
 
 const usernameForm = document.querySelector(".username-form");
 const usernameCancelButton = document.querySelector(".username-cancel-button");
@@ -24,10 +22,7 @@ const emailFormButton = document.querySelector(".email-form-button");
 const oldPasswordInput = document.querySelector(".old-password-input");
 const newPasswordInput = document.querySelector(".new-password-input");
 const passwordFormButton = document.querySelector(".password-form-button");
-
-activityLink.href = "/profile/activity/summary/" + getToken();
-messageLink.href = "/profile/messages/" + getToken();
-accountLink.href = "/profile/account/" + getToken();
+const updateAddressButton = document.querySelector(".update-address-button");
 
 usernameEditButton.addEventListener("click", () => {
     usernameEditButton.classList.add("invisible");
@@ -127,6 +122,46 @@ passwordFormButton.addEventListener("click", async () => {
     newPasswordInput.value = "";
 })
 
+updateAddressButton.addEventListener("click", async () => {
+    if (!navigator.geolocation) {
+        throw new Error({error: "Geolocation is not supported by your browser"});
+    }
+    let latitude;
+    let longitude;
+    const geo = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            latitude = position.coords.latitude;
+            longitude = position.coords.longitude;
+            resolve();
+            if (!latitude || !longitude) {
+                reject();
+            }
+        });  
+    })
+    await geo;
+    updateUserAddress(latitude, longitude).then(res => {
+        if (res.error) {
+            alert(res.error);
+        } else {
+            addressLink.href = "https://google.com/maps?q=" + latitude + "," + longitude
+        }
+    })
+
+})
+
+async function updateUserAddress(latitude, longitude) {
+    const response = await fetch("/updateuseraddress/" + getToken(), {
+        method: 'PATCH',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            latitude: latitude.toString(),
+            longitude: longitude.toString()
+        })
+    }).then(res => res.json());
+    return response
+}
+
 async function updateUserEmail() {
     const response = await fetch("/updateuseremail/" + emailInput.value + "/" + getToken(), {
         method: 'GET',
@@ -164,3 +199,11 @@ async function getUser() {
 }
 
 nameInfoTags();
+
+function getToken() {
+    return window.location.href.split("/")[window.location.href.split("/").length - 1];
+}
+
+getUser().then(user => {
+    addressLink.href = "https://google.com/maps?q=" + user.address.latitude + "," + user.address.longitude;
+})
