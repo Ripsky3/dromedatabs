@@ -49,13 +49,21 @@ async function createUserItemsTags(userItems) {
         userItemsWrapper.appendChild(userItemPrice);
         userItemsWrapper.classList.add("useritem-wrapper");
         userItemDiv.appendChild(userItemsWrapper);
-        if (userItems[i].received == false) {
+
+        if (userItems[i].received == false) {      
             let userItemsReceivedButton = document.createElement("button");
             userItemsReceivedButton.innerHTML = "I have received the item";
-            userItemsReceivedButton.addEventListener("click", (e) => {
-                updateItemReceivedTotrue(userItems[i]._id );
-            })
             userItemDiv.appendChild(userItemsReceivedButton);
+
+            userItemsReceivedButton.addEventListener("click", (e) => {
+                userItemDiv.removeChild(userItemsReceivedButton);
+                let userItemReceived = document.createElement("h3");
+                userItemReceived.innerHTML = "Received Item";
+                userItemDiv.appendChild(userItemReceived);
+                updateItemReceivedTotrue(userItems[i]._id );
+                
+            })
+            
         } else {
             let userItemReceived = document.createElement("h3");
             userItemReceived.innerHTML = "Received Item";

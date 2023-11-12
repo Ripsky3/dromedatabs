@@ -1,7 +1,5 @@
 const buyCartButton = document.querySelector(".buy-cart-button");
 
-
-
 buyCartButton.addEventListener("click", (e) => {
     e.preventDefault();
     buyCartItems();
@@ -29,7 +27,11 @@ async function buyCartItems() {
     }).then(({url}) => {
         window.location = url;
     }).catch(e => {
-        alert(e.error);
+        if (e.error.includes("line_items")) {
+            alert("You must have at least 1 item in your cart to buy");
+        } else {
+            alert(e.error);
+        }
     })
 }
 

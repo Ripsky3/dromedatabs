@@ -1,0 +1,9 @@
+.default-button {
+    margin: 0;
+    padding: 1rem;
+    background-color: rgb(60, 108, 249);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    cursor: pointer;
+}

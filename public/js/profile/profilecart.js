@@ -30,8 +30,16 @@ async function createUserItemsTags(userItems) {
         userItemsWrapper.appendChild(userItemDescription);
         userItemsWrapper.appendChild(userItemPrice);
         userItemsWrapper.classList.add("useritem-wrapper");
-
         userItemDiv.appendChild(userItemsWrapper);
+
+        let cartItemRemoveButton = document.createElement("button");
+        cartItemRemoveButton.innerHTML = "Remove from Cart";
+        cartItemRemoveButton.addEventListener("click", () => {
+            itemsDisplay.removeChild(cartItemRemoveButton.parentElement);
+            removeItemFromCart(userItems[i]._id);
+        });
+        userItemDiv.appendChild(cartItemRemoveButton);
+        
 
         displayUserItems(userItemDiv);
     }
@@ -57,6 +65,15 @@ async function getItemImage(itemId) {
 async function getUserCartItems() {
     const response = await fetch("/getusercartitems/" + getToken(), {
         method: 'GET',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' }
+    }).then(res => res.json());
+    return response
+}
+
+async function removeItemFromCart(item_id) {
+    const response = await fetch("/removeitemfromcart/" + item_id + "/" + getToken(), {
+        method: 'PATCH',
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' }
     }).then(res => res.json());

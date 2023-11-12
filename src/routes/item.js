@@ -50,10 +50,15 @@ router.post("/createitem/:token", auth, upload.single("itemFile"), async (req, r
             item.priceincents = parseInt(item.price.slice(1)) * 100;
         }
 
+        if (item.priceincents >= 100000000) {
+            throw new Error("You cannot price a item at a million dollars or more");
+        }
+
         await item.save();
         res.redirect("/profile/activity/summary/" + req.params.token);
+        
     } catch (e) {
-        res.redirect("/createitemerror/enterallinputs/" + req.params.token);
+        res.redirect("/createitemerror/" + e + "/" + req.params.token);
     }
 })
 
@@ -315,6 +320,21 @@ router.patch("/updateitemreceivedtotrue/:item_id/:token", auth, async (req, res)
     try {
         const item = await Item.findById(req.params.item_id);
         item.received = true;
+        item.save();
+        res.send(item);
+    } catch (e) {   
+        res.send({error: e});
+    }
+})
+
+router.patch("/removeitemfromcart/:item_id/:token", auth, async (req, res) => {
+    try {
+        const item = await Item.findById(req.params.item_id);
+        for (let i = 0; i < item.cartusers.length; i++) {
+            if (item.cartusers[i].cartuser == req.user.name) {
+                item.cartusers.splice(i, 1);
+            }
+        }
         item.save();
         res.send(item);
     } catch (e) {   

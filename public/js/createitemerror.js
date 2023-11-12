@@ -1,4 +1,4 @@
-alert("Enter All Inputs");
+alert(getError().split("%20").join(" "));
 window.location.href = "/profile/activity/selling/listitemform/" + getToken();
 
 function getToken() {

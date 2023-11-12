@@ -87,12 +87,11 @@ function setSellingInfoNumber(userItems) {
         }
         if (userItems[i].purchased == true && userItems[i].received == true) {
             buyerReceivedNumCount += 1;
-        }
-        if (userItems[i].purchased == true) {
             totalNumCount += userItems[i].priceincents * .01;
-        } else {
-            activeNumCount += 1;
         }
+        if (userItems[i].purchased == false) {
+            activeNumCount += 1;
+        } 
     }
     activeNum.innerHTML = `${activeNumCount}`;
     soldNum.innerHTML = `${soldNumCount}`;
