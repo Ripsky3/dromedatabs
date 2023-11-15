@@ -31,12 +31,22 @@ router.get("/error/:error", (req, res) => {
 })
 
 router.post("/createuser", async (req, res) => {
-    const user = new User({
-        name: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-        address: {latitude: req.body.latitude, longitude: req.body.longitude}
-    }) 
+    let user;
+    if (req.body.latitude && req.body.longitude) {
+        user = new User({
+            name: req.body.username,
+            email: req.body.email,
+            password: req.body.password,
+            address: {latitude: req.body.latitude, longitude: req.body.longitude}
+        }) 
+    } else {
+        user = new User({
+            name: req.body.username,
+            email: req.body.email,
+            password: req.body.password
+        }) 
+    }
+    
     
     try {
         const token = await user.generateAuthToken();
