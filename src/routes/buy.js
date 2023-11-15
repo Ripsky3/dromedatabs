@@ -1,9 +1,7 @@
-require("dotenv").config();
-
 const express = require("express");
 const auth = require("../middleware/auth");
 const router = new express.Router();
-const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
+const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 router.post("/buycartitems/:token", auth, async (req, res) => {
     try {
@@ -29,8 +27,8 @@ router.post("/buycartitems/:token", auth, async (req, res) => {
                     quantity: 1
                 }
             }),
-            success_url: `${process.env.SERVER_URL}/updatepurchaseditem/` + id + "/" + req.params.token,
-            cancel_url: `${process.env.SERVER_URL}/profile/activity/summary/` + req.params.token
+            success_url: `${process.env.SERVER_URL}updatepurchaseditem/` + id + "/" + req.params.token,
+            cancel_url: `${process.env.SERVER_URL}profile/activity/summary/` + req.params.token
         })
         res.json({ url: session.url})
     } catch(e) {
