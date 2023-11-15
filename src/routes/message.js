@@ -2,6 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const Message = require("../models/message");
 const Item = require("../models/item");
+const User = require("../models/user");
 const auth = require("../middleware/auth");
 
 router.get("/profile/messages/:token", auth, async (req, res) => {
@@ -24,6 +25,10 @@ router.get("/seller/message/:item_id/:token", auth, async (req, res) => {
     res.render("profilesellermessage");
 })
 
+router.get("/seller/message/:username/:token", auth, async (req, res) => {
+    res.render("profilesellermessage");
+})
+
 router.get("/sellernoauth/message/:item_id", async (req, res) => { ///
     res.render("profilesellermessagenoauth");
 })
@@ -40,6 +45,24 @@ router.post("/seller/message/:item_id/:token", auth, async (req, res) => {
         res.redirect("/profile/activity/summary/" + req.params.token)
     } catch (e) {
         
+    }  
+})
+
+router.post("/seller/messagewithusername/:username/:token", auth, async (req, res) => {// Figure out why message will not save()
+    try {
+        const user = await User.findOne({name: req.params.username});
+        console.log(user)
+        const message = new Message({
+            message: req.body.message,
+            receiver: user.name,
+            sender: req.user.name
+        })
+        console.log(message);
+        await message.save();
+        res.redirect("/profile/activity/summary/" + req.params.token)
+    } catch (e) {
+        console.log(e)
+        res.send({error: "Cannot send message"})
     }  
 })
 

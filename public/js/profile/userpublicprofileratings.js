@@ -35,7 +35,7 @@ function createUserRatingsTags(userRatings) {
 
         let userRatingsRater = document.createElement("a");
         userRatingsRater.innerHTML = userRatings[i].rater;
-        userRatingsRater.href = "/profileother/" + userRatings[i].rater + "/" + getToken();
+        userRatingsRater.href = "/publicprofile/" + userRatings[i].rater + "/" + getToken();
 
         userRatingsWrapper.appendChild(starWrapper);
         userRatingsWrapper.appendChild(userRatingsMessage);

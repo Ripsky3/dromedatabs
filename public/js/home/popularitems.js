@@ -71,6 +71,10 @@ async function getPopularItems() {
 }
 
 getPopularItems().then(popularItems => {
-    popularItemDisplayTitle.classList.remove("invisible");
+    console.log(popularItems)
+    if (popularItems.length > 0) {
+        popularItemDisplayTitle.classList.remove("invisible");
+    }
+    
     createPopularItemsTags(popularItems);
 })

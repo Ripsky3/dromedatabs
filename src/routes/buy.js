@@ -5,7 +5,6 @@ const auth = require("../middleware/auth");
 const router = new express.Router();
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
-
 router.post("/buycartitems/:token", auth, async (req, res) => {
     try {
         const cartItemsForStripe = new Map([]);

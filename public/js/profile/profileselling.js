@@ -96,7 +96,13 @@ function setSellingInfoNumber(userItems) {
     activeNum.innerHTML = `${activeNumCount}`;
     soldNum.innerHTML = `${soldNumCount}`;
     buyerReceivedNum.innerHTML = `${buyerReceivedNumCount}`;
-    totalNum.innerHTML = "$" + `${totalNumCount.toString().slice(0, totalNumCount.toString().indexOf(".") + 3)}`;
+    console.log(totalNumCount)
+    if (totalNumCount.toString().indexOf(".") >= 0) {
+        totalNum.innerHTML = "$" + `${totalNumCount.toString().slice(0, totalNumCount.toString().indexOf(".") + 3)}`;
+    } else {
+        totalNum.innerHTML = "$" + `${totalNumCount.toString()}`;
+    }
+    
 }
 
 function getPrice(arr) {

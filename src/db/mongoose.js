@@ -9,6 +9,7 @@ try {
     }
       
     );
+    
     console.log("Connected to mongoose!")
 
   } catch (e) {

@@ -113,6 +113,7 @@ passwordFormButton.addEventListener("click", async () => {
         alert("You must enter both your old and new password");
     } else {
         updateUserPassword(oldPasswordInput.value, newPasswordInput.value).then(res => {
+            console.log(res)
             if (res.error) {
                 alert (res.error);
             }       

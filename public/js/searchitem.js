@@ -179,12 +179,8 @@ async function updateRecentSearch(recentSearch) {
 }
 
 getNonPurchasedItems().then(items => {
-    updateTopSearch(items[0]._id).then(res => {
-        if (res.error) {
-            alert(res.error);
-        }
-    })
     createItemsTags(sortItems(items));
+    sortItemsAndUpdateTopSearch(sortItems(items));
 }).catch(e => {
     alert(e.message);
 })
@@ -194,3 +190,13 @@ updateRecentSearch(getSearchedInput()).then(res => {
         alert(res.error);
     }
 })
+
+function sortItemsAndUpdateTopSearch(sortedItems) {
+    for (let i = 0; i < 4; i++) {
+        updateTopSearch(sortedItems[i]._id).then(res => {
+            if (res.error) {
+                alert(res.error);
+            }
+        })
+    }
+}

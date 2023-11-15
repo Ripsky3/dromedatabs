@@ -173,6 +173,7 @@ router.get("/updateuserpassword/:oldpassword/:newpassword/:token", auth, async (
         await req.user.updatePassword(req.user, req.params.oldpassword, req.params.newpassword);
         res.send(req.user);
     } catch (e) {
+        console.log(e)
         res.send({error: e.message});
     }
 })
@@ -183,6 +184,10 @@ router.get("/userpublicprofile/:token", auth, async (req, res) => {
 
 router.get("/userpublicprofileratings/:token", auth, async (req, res) => {
     res.render("userpublicprofileratings");
+})
+
+router.get("/userpublicprofiledeleteaccount/:token", auth, async (req, res) => {
+    res.render("userpublicprofiledeleteaccount");
 })
 
 router.get("/publicprofilenoauth/:username", async (req, res) => {
@@ -199,6 +204,14 @@ router.get("/publicprofileratingsnoauth/:username", async (req, res) => {
 
 router.get("/publicprofileratings/:username/:token", auth, async (req, res) => {
     res.render("publicprofileratings");
+})
+
+router.get("/publicprofilemessage/:username/:token", auth, async (req, res) => {
+    res.render("publicprofilemessage");
+})
+
+router.get("/publicprofilerate/:username/:token", auth, async (req, res) => {
+    res.render("publicprofilerate");
 })
 
 router.get("/updaterecentsearch/:recentsearch/:token", auth, async (req, res) => {
@@ -238,6 +251,26 @@ router.get("/getitempurchaseduser/:item_id/:token", auth, async (req, res) => {
         res.send({error: "Could not find user"});
     }
 })
+
+router.delete("/deleteuser/:token", auth, async (req, res) => {
+    try {
+        await User.findOneAndDelete({name: req.user.name});
+        res.send(JSON.stringify("gohome"));
+    } catch(e) {
+        res.send({error: "Could not delete user"});
+    }
+})
+
+router.get("/getuserfrom_id/:user_id/:token", auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.params.user_id);
+
+        res.send(user.name);
+    } catch(e) {
+        res.send({error: "Could not find user"});
+    }
+})
+
 
 module.exports = {
     userRouter: router

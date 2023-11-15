@@ -21,7 +21,7 @@ async function createUserItemsTags(messages) {
             messagesSenderLabel.innerHTML = "Sent By:"
             let messagesSender = document.createElement("a");
             messagesSender.innerHTML = messages[i].sender;
-            messagesSender.href = "/profileother/" + messages[i].sender + "/" + getToken();
+            messagesSender.href = "/publicprofile/" + messages[i].sender + "/" + getToken();
 
             messagesWrapper.appendChild(messagesSenderLabel);
             messagesWrapper.appendChild(messagesSender);
@@ -31,7 +31,7 @@ async function createUserItemsTags(messages) {
             messagesReceiverLabel.innerHTML = "Sent To:"
             let messagesReceiver = document.createElement("a");
             messagesReceiver.innerHTML = messages[i].receiver;
-            messagesReceiver.href = "/profileother/" + messages[i].receiver + "/" + getToken();
+            messagesReceiver.href = "/publicprofile/" + messages[i].receiver + "/" + getToken();
 
             messagesWrapper.appendChild(messagesReceiverLabel);
             messagesWrapper.appendChild(messagesReceiver);

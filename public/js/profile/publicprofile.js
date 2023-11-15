@@ -1,9 +1,7 @@
 const itemDisplay = document.querySelector(".items-display");
 const publicProfileTitle = document.querySelector(".public-profile-title");
-const ratingsLink = document.querySelector(".main-option-ratings");
 
 publicProfileTitle.innerHTML = "Public profile: " + getPublicProfileName();
-ratingsLink.href = "/publicprofileratings/" + getPublicProfileName() + "/" + getToken();
 
 
 function getToken() {

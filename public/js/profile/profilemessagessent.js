@@ -14,7 +14,7 @@ function createUserItemsTags(messages) {
         messagesReceiverLabel.innerHTML = "Sent To:"
         let messagesReceiver = document.createElement("a");
         messagesReceiver.innerHTML = messages[i].receiver;
-        messagesReceiver.href = "/profileother/" + messages[i].receiver + "/" + getToken();
+        messagesReceiver.href = "/publicprofile/" + messages[i].receiver + "/" + getToken();
 
         let message = document.createElement("p");
         message.innerHTML = messages[i].message;

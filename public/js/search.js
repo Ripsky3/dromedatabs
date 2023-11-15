@@ -6,7 +6,7 @@ searchInput.addEventListener("keyup", () => {
     if (getToken()) {
         searchButton.href = "/itemsearch/" + searchInput.value + "/" + getToken();
     } else {
-        searchButton.href = "/itemsearchguest/" + searchInput.value 
+        searchButton.href = "/itemsearchguest/" + searchInput.value; 
     }
 })
 

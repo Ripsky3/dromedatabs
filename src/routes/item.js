@@ -6,6 +6,9 @@ const auth = require("../middleware/auth")
 const multer = require("multer");
 
 const upload = multer({
+    limits: {
+        fileSize: 100000
+    },
     fileFilter(req, file, cb) {
         if (file.originalname.endsWith(".jpg") ||
         file.originalname.endsWith(".jpeg") ||
@@ -58,7 +61,8 @@ router.post("/createitem/:token", auth, upload.single("itemFile"), async (req, r
         res.redirect("/profile/activity/summary/" + req.params.token);
         
     } catch (e) {
-        res.redirect("/createitemerror/" + e + "/" + req.params.token);
+        console.log(e.message)
+        res.redirect("/createitemerror/" + e.message + "/" + req.params.token);
     }
 })
 
@@ -248,7 +252,8 @@ router.patch("/updatetopsearch/:id", async (req, res) => {
     try {
         const item = await Item.findById(req.params.id);
         item.topsearch += 1;
-        item.save()
+        item.save();
+        res.send(item);
     } catch (e) {   
         res.send({error: "Can't update top search"});
     }
@@ -257,20 +262,42 @@ router.patch("/updatetopsearch/:id", async (req, res) => {
 router.get("/getpopularitems", async (req, res) => {
     try {
         const items = await Item.find({});
+        const sortedItems = [];
+        let maxIndexArr = [];
+        
         for (let i = 0; i < items.length - 1; i++) {
             let tempMax = 0;
             let tempMaxIndex;
             for (let j = i; j < items.length; j++) {
-                if (items[j].topsearch >= tempMax) {
-                    tempMax = items[j];
-                    tempMaxIndex = j;
+                /*console.log("///////////////")
+                console.log(items[i].name);
+                console.log(items[j].name);
+                console.log("///////////////")*/
+                let tempMaxIndexAlreadyUsed = false;
+                if (items[j].topsearch > tempMax) {
+                    /*console.log("///////////////")
+                    console.log(items[j].name);
+                    console.log("///////////////")*/
+                    for (let x = 0; x < maxIndexArr.length; x++) {
+                        if ( maxIndexArr[x] == j ) {
+                            
+                            tempMaxIndexAlreadyUsed = true;
+                        }
+                    }
+                    if (!tempMaxIndexAlreadyUsed) {
+                        tempMax = items[j].topsearch;
+                        tempMaxIndex = j;
+                        //console.log("New temp max: " + items[j].name)
+                    }      
                 }
             }
-            let tempItemI = items[i]
-            items[i] = items[tempMaxIndex];
-            items[tempMaxIndex] = tempItemI;
+            //console.log("Finished loop")
+            sortedItems.push(items[tempMaxIndex]);
+            maxIndexArr.push(tempMaxIndex);
+            
         }
-        res.send(items.splice(0, 4));
+
+        res.send(sortedItems.splice(0, 4));
     } catch (e) {   
         res.status(404).send("can't find");
     }
