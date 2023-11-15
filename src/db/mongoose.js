@@ -1,8 +1,9 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 
 try {
     // Connect to the MongoDB cluster
-    mongoose.connect("mongodb+srv://MyDatabase:MongoDatabase@cluster0.u5xvxuz.mongodb.net/",
+    mongoose.connect(process.env.MONGO_DB_URL,
     { 
         useNewUrlParser: true, 
         useUnifiedTopology: true
