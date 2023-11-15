@@ -36,13 +36,3 @@
     border: none;
     cursor: pointer;
 }
-
-.item-file-label {
-    font-size: 14px;
-}
-
-.item-wrapper-file {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
