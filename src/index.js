@@ -10,7 +10,7 @@ const { ratingRouter } = require("./routes/rating");
 const { buyRouter } = require("./routes/buy");
 
 const app = express();
-const port = process.env.PORT; 
+const port = process.env.PORT || 3000; 
 
 const publicDirectoryPath = path.join(__dirname, "../public");
 
