@@ -6,7 +6,7 @@ const auth = require("../middleware/auth")
 
 
 router.get("", (req, res) => {
-    res.render("home");
+    res.status(200).render("home");
 })
 
 router.get("/home", async (req, res) => {
@@ -32,6 +32,8 @@ router.get("/error/:error", (req, res) => {
 
 router.post("/createuser", async (req, res) => {
     let user;
+    console.log(1)
+    console.log(req.body)
     if (req.body.latitude && req.body.longitude) {
         user = new User({
             name: req.body.username,
@@ -51,12 +53,12 @@ router.post("/createuser", async (req, res) => {
     try {
         const token = await user.generateAuthToken();
         await user.save();
-        res.send({token: token});
+        res.status(201).send({token: token});
     } catch (e) {
         if (e.message.includes("duplicate")) {
-            res.send({error: "Credential already exist"});
+            res.status(500).send({error: "Credential already exist"});
         } else {
-            res.send({error: "Make sure to enter valid information in all boxes"});
+            res.status(500).send({error: "Make sure to enter valid information in all boxes"});
         }
     }
 })
