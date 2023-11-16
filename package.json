@@ -5,11 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "env-cmd -f ./config/dev.env nodemon src/index.js -e js,hbs",
-    "test": "env-cmd -f ./config/test.env jest --watch"
-  },
-  "jest": {
-    "testEnvironment": "node"
+    "dev": "env-cmd -f ./config/dev.env nodemon src/index.js -e js,hbs"
   },
   "author": "",
   "license": "ISC",
@@ -29,8 +25,6 @@
     "validator": "^13.11.0"
   },
   "devDependencies": {
-    "env-cmd": "^10.1.0",
-    "jest": "^29.7.0",
-    "supertest": "^6.3.3"
+    "env-cmd": "^10.1.0"
   }
 }
