@@ -1,0 +1,109 @@
+.usertab-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    background-color: #520e7d;
+    padding: 0 10px;
+    margin: 10px 0;
+}
+
+.usertab-div a {
+    color: white;
+}
+
+.main-display-header-wrapper {
+    display: flex;
+}
+
+.main-display-header-wrapper button {
+    margin: 0;
+    padding: 4px 6px;
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    background-color: #520e7d;
+    color: white;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+.user-tab-update-button {
+    margin: 0;
+    padding: 4px 6px;
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+.user-tab-bookmark-link {
+    margin: 0;
+    padding: 4px 6px;
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    color: black;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+
+.user-tab-bookmark-link a {
+    color: black;
+}
+
+.container-wrapper {
+    padding: 2rem 5rem;
+}
+
+.hidden {
+    display: none
+}
+
+.tap-wrapper-editcategory-options button {
+    margin: 0;
+    padding: 4px 6px;
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    background-color: #520e7d;
+    color: white;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+.wrapper-two {
+    display: flex;
+}
+
+/* Media queries */
+
+@media (max-width: 480px) {
+    .main-display-header-wrapper {
+        flex-direction: column;
+    }
+
+    .wrapper-two {
+        display: flex;
+        flex-direction: column;
+        margin: 5px 0;
+    }
+
+    .tab-wrapper {
+        margin: 5px 0;
+    }
+
+    .tab-category-select {
+        width: 300px;
+    }
+}

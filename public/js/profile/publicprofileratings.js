@@ -7,7 +7,6 @@ function getToken() {
     return window.location.href.split("/")[window.location.href.split("/").length - 1];
 }
 
-
 function getPublicProfileName() {
     return window.location.href.split("/")[window.location.href.split("/").length - 2];
 }
@@ -40,7 +39,7 @@ function createUserRatingsTags(userRatings) {
 
         let userRatingsRater = document.createElement("a");
         userRatingsRater.innerHTML = userRatings[i].rater;
-        userRatingsRater.href = "/profileother/" + userRatings[i].rater + "/" + getToken();
+        userRatingsRater.href = "/publicprofile/" + userRatings[i].rater + "/" + getToken();
 
         userRatingsWrapper.appendChild(starWrapper);
         userRatingsWrapper.appendChild(userRatingsMessage);
@@ -49,6 +48,7 @@ function createUserRatingsTags(userRatings) {
         userRatingsDiv.appendChild(userRatingsWrapper);
 
         userRatingsDiv.classList.add("useritem-div");
+        userRatingsDiv.classList.add("userratings-div");
 
         displayUserRatings(userRatingsDiv);
     }

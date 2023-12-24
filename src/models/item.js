@@ -58,10 +58,6 @@ const itemSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    image: {
-        type: Buffer,
-        required: true
-    },
     username: {
         type: String,
         required: true,

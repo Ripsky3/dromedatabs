@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dromeda Tabs</title>
+    <link rel="stylesheet" href="/css/universal.css">
+    <link rel="stylesheet" href="/css/display.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/forms/itemform.css">
+    <link rel="stylesheet" href="/css/profile/profileoptions.css">
+    <link rel="stylesheet" href="/css/profile/profilemain.css">
+    <link rel="stylesheet" href="/css/profile/profiletabscreatenewtab.css">
+    <link rel="stylesheet" href="/css/useritem.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h3><a class="header-title" href="">Dromeda</a></h3>
+        <div class="search-box">
+            <input class="header-search-box-input" type="text" placeholder="Search Nile">
+            <a href="" class="header-search-box-search-button"><i class="fa-solid fa-magnifying-glass header-search-box-search-button"></i></a>
+        </div>
+        <div class="hamburger">
+          <div class="hamburger-bun"></div>
+          <div class="hamburger-bun"></div>
+          <div class="hamburger-bun"></div>
+        </div>
+        <ul class="header-options">
+            <a class="profile-link" href=""></a>
+            <li class="header-option"><a href="/signin" class="header-option-sign-in">SIGN IN</a></li>
+            <li class="header-option"><a href="/signup" class="header-option-sign-up">SIGN UP</a></li>
+            <button class="signout-link" href="">SIGN OUT</button>
+        </ul>
+        <ul class="header-options-mobile invisible hide">
+            <button class="header-options-mobile-exit">X</button>
+            <a class="profile-link" href=""></a>
+            <li class="header-option"><a href="/signin" class="header-option-sign-in">SIGN IN</a></li>
+            <li class="header-option"><a href="/signup" class="header-option-sign-up">SIGN UP</a></li>
+            <button class="signout-link" href="">SIGN OUT</button>
+        </ul>
+      </header>
+      <div class="container-wrapper"> 
+        <div class="profile-options">
+          <div class="profile-options-wrapper">
+            <a class="profile-option profile-option-activity" href="">Activity</a>
+            <a class="profile-option profile-option-messages" href="">Messages</a>
+            <a class="profile-option profile-option-account" href="">Account</a>
+          </div>
+          <a href="" class="profile-option public-profile-link">TempProfile</a>
+        </div>
+        <hr></hr>
+
+        <div class="main">
+          <div class="main-options">
+            <a href="" class="main-option main-option-create-new-tab">Create new Tab</a>
+            <a href="" class="main-option main-option-drafted-tabs">Drafted Tabs</a>
+            <a href="" class="main-option main-option-posted-tabs">Posted Tabs</a>
+            <a href="" class="main-option main-option-bookmarked-tabs">Bookmarked Tabs</a>
+          </div>
+          <div class="main-display">
+
+            <div class="tab-editor">
+              <button class="tab-save-button">Draft</button>
+              <button class="tab-post-button">Post</button>
+              <button class="add-new-tab-string-section-button">Add new section</button>
+            </div>
+
+            <form action="" class="tab-form" method="post">
+                  <div class="tab-wrapper">
+                      <label for="tabName" class="tab-name-label">Tab Name: </label>
+                      <input name="tabName" type="text" class="tab-name-input" autocomplete="off">
+                  </div>
+                  <div class="tab-wrapper">
+                    <label for="tab-category-select">Choose tab category:</label>
+                    <select name="tabDescription" class="tab-category-select">
+                      <option value="">--Please choose an option--</option>
+                      <option value="rock">Rock</option>
+                      <option value="punk">Punk</option>
+                      <option value="blues">Blues</option>
+                      <option value="country">Country</option>
+                      <option value="rap">Rap</option>
+                      <option value="hiphop">Hip Hop</option>
+                      <option value="classical">Classical</option>
+                      <option value="jazz">Jazz</option>
+                      <option value="pop">Pop</option>
+                      <option value="folk">Folk</option>
+                      <option value="indie">Indie</option>
+                      <option value="gospel">Gospel</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+            </form>
+
+            <div class="tab-display">
+              <div class="tab-display-row">
+                <textarea class="first-tab-string-section" autocomplete="off"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="/js/home/header.js"></script>
+    <script src="/js/homelink.js"></script>
+    <script src="/js/home/hometitle.js"></script>
+    <script src="/js/signout.js"></script>
+    <script src="/js/profile/summarybutton.js"></script>
+    <script src="/js/profile/publicprofilelink.js"></script>
+    <script src="/js/profile/createnewtablink.js"></script>
+    <script src="/js/profile/accountlink.js"></script>
+    <script src="/js/profile/activitylink.js"></script>
+    <script src="/js/profile/messagelink.js"></script>
+    <script src="/js/profile/accountlink.js"></script>
+    <script src="/js/profile/draftedtabslink.js"></script>
+    <script src="/js/profile/profiletabscreatenewtab.js"></script>
+    <script src="/js/profile/postedtabslink.js"></script>
+    <script src="/js/profile/bookmarkedtabslink.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="https://kit.fontawesome.com/d5f4e05c7d.js" crossorigin="anonymous"></script>
+  </body>
+</html>

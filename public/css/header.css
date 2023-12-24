@@ -2,14 +2,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1c1c1c;
-    padding: 1rem;
-    color: white;
+    padding: 0 200px;
+    background-color: #520e7d;
 }
 
 .header-title {
-    color: white;
     text-decoration: none;
+    color: white;
 }
 
 .header-options {
@@ -21,78 +20,186 @@
 }
 
 .header-option-sign-in {
+    margin: 0;
+    padding: 4px 6px;
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    color: black;
     text-decoration: none;
-    color: white;
-    padding: 0.3rem;
-    margin: 0 0.1rem;
+    margin: 0 0.5rem;
 }
 
 .header-option-sign-up {
+    margin: 0;
+    padding: 4px 6px;
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    color: black;
     text-decoration: none;
-    color: white;
-    padding: 0.3rem;
-    margin: 0 0.1rem;
+    margin: 0 0.5rem;
 }
 
 .header-list-link:hover {
-    border: 0.1rem solid white;
+    border: 0.1rem solid blue;
 }
 
 .search-box {
-
+    background-color: white;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
 }
 
 .header-search-box-input {
-    padding: 1rem;
+    border: none;
     width: 50rem;
     font-family: "Poppins", sans-serif;
     margin: 0;
-}
-
-.header-search-box-input ::selection {
-    border: 0.1rem solid rgb(60, 108, 249);
-    
+    outline: none;
+    margin-left: 5px;
 }
 
 .header-search-box-search-button {
+    background-color: black;
     margin: 0;
-    padding: 1rem;
-    background-color: rgb(60, 108, 249);
-    color: white;
+    padding: 5px;
     font-family: "Poppins", sans-serif;
     border: none;
     cursor: pointer;
+    color: white;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
 .profile-link {
     margin: 0;
-    padding: 1rem;
-    background-color: rgb(60, 108, 249);
-    color: white;
+    padding: 4px 6px;
+    font-size: 12px;
     font-family: "Poppins", sans-serif;
+    font-weight: 500;
     border: none;
     cursor: pointer;
+    background-color: white;
+    color: black;
     text-decoration: none;
     margin: 0 0.5rem;
 }
 
 .home-link {
-    margin: 0 0.5rem;
-    padding: 1rem;
-    background-color: rgb(60, 108, 249);
-    color: white;
+    margin: 0;
+    padding: 4px 6px;
+    font-size: 12px;
     font-family: "Poppins", sans-serif;
+    font-weight: 500;
     border: none;
     cursor: pointer;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+.signout-link {
+    margin: 0;
+    padding: 4px 6px;
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    color: black;
     text-decoration: none;
 }
 
-.signout-button {
-    margin: 0;
-    padding: 1rem;
-    background-color: rgb(60, 108, 249);
-    color: white;
-    font-family: "Poppins", sans-serif;
-    border: none;
-    cursor: pointer;
+.invisible {
+    display: none;
+}
+
+.hide {
+    transform: translateX(200%);
+}
+/* Media queries */
+
+@media (max-width: 480px) {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+        background-color: #520e7d;
+    }
+
+    .header-options {
+        display: none;
+    }
+
+    .header-options-mobile {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: black;
+        width: 50%;
+        height: 100vh;
+        transition: all 1s ease-in-out;
+        z-index: 5;
+        margin: 0;
+        padding: 20px 5px;
+    }
+
+    .header-title {
+        font-size: 16px;
+    }
+
+    .header-option {
+        margin: 10px 0;
+    }
+
+    .profile-link {
+        margin: 10px 0;
+    }
+
+    .signout-link {
+        margin: 10px 0;
+    }
+
+    .header-search-box-input {
+        border: none;
+        width: 200px;
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        outline: none;
+        margin-left: 5px;
+        font-size: 12px;
+    }
+
+    .hamburger {
+        cursor: pointer;
+    }
+
+    .hamburger-bun {
+        background-color: white;
+        padding: 2px 20px;
+        margin: 5px 0;
+    }
+
+    .header-options-mobile-exit {
+        display: flex;
+        flex-direction: column;
+        color: black;
+        background-color: white;
+        border-radius: 25px;
+        cursor: pointer;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+    }
+
 }

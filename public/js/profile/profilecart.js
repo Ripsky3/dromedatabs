@@ -9,14 +9,6 @@ async function createUserItemsTags(userItems) {
         let userItemDiv = document.createElement("div");
         userItemDiv.classList.add("useritem-div");
 
-        //Beginning
-        let userItemImage = document.createElement("img");
-        userItemImage = await getItemImage(userItems[i]._id).then(res => {
-            userItemImage.src = "data:image/jpg;base64," + res;
-            userItemImage.classList.add("item-image");
-            userItemDiv.appendChild(userItemImage);
-        })
-
         //Middle
         let userItemsWrapper = document.createElement("div");
         let userItemName = document.createElement("a");

@@ -1,0 +1,17 @@
+.tabs-search-display {
+    padding: 20px;
+}
+
+.tab-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    background-color: #520e7d;
+    padding: 0 10px;
+    margin: 10px 0;
+}
+
+.tab-div a {
+    color: white;
+}

@@ -8,6 +8,7 @@ const { itemRouter } = require("./routes/item");
 const { messageRouter } = require("./routes/message");
 const { ratingRouter } = require("./routes/rating");
 const { buyRouter } = require("./routes/buy");
+const { tabRouter } = require("./routes/tab");
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use(itemRouter);
 app.use(messageRouter);
 app.use(ratingRouter);
 app.use(buyRouter);
+app.use(tabRouter);
 
 const port = process.env.PORT || 3000; 
 

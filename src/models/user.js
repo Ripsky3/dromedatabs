@@ -42,14 +42,7 @@ const userSchema = new mongoose.Schema({
             required: true
         }
     }],
-    address: {
-        latitude: {
-            type: String
-        },
-        longitude: {
-            type: String
-        }
-    }
+    bookmarks: []
 })
 
 userSchema.pre("save", async function(next) {
@@ -79,8 +72,8 @@ userSchema.methods.updatePassword = async function(user, oldpassword, newpasswor
     }
 }
 
-userSchema.statics.getUserByCredentials = async (email, password) => {
-    const user = await User.findOne({ email });
+userSchema.statics.getUserByCredentials = async (name, email, password) => {
+    const user = await User.findOne({ name, email });
     
     if (!user) {
         throw new Error("Incorrect credentials");

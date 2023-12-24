@@ -1,5 +1,5 @@
 .display {
-    margin-bottom: 700px;
+    margin-bottom: 620px;
 }
 
 .display-option {
@@ -10,69 +10,38 @@
     justify-content: center;
     position: absolute;
     transition: transform 1s ease-in-out;
-}
-
-.display-option-one {
-    background: url("../img/christmasdecor.jpg");
-    background-position: 8px;
+    background: url("../images/guitar.jpg");
     background-size: cover;
-}
-
-.display-option-two {
-    background: url("../img/bags.jpg");
-    background-position: 8px;
-    background-size: cover;
-}
-
-.display-option-three {
-    background: url("../img/shopmakeup.jpg");
-    background-position: 8px;
-    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .display-title {
     font-size: 3rem;
     margin: 0.5rem 0;
-    color: white;
-    margin: 0 5rem;
+    padding: 0 200px;
+}
+
+.display-title span {
+    color: #520e7d;
 }
 
 .display-paragraph {
     margin: 0.5rem 0;
-    color: white;
-    margin: 0 5rem;
+    width: 500px;
+    padding: 0 200px;
 }
 
 .display-link {
     display: block;
     margin: 0.5rem 0;
     padding: 1rem;
-    background-color: #1c1c1c;
+    background-color: #520e7d;
     color: white;
     font-family: "Poppins", sans-serif;
     border: none;
     cursor: pointer;
-    width: 130px;
-    margin: 0 5rem;
-}
-
-.display-control {
-    margin: 0.5rem 0;
-    display: flex;
-    justify-content: space-between;
-    margin: 0 5rem;
-}
-
-.display-control button {
-    display: block;
-    margin: 0.5rem 0;
-    padding: 1rem;
-    background-color: #1c1c1c;
-    color: white;
-    font-family: "Poppins", sans-serif;
-    border: none;
-    cursor: pointer;
-    
+    width: 200px;
+    margin: 0.5px 200px;
 }
 
 .display-title-popular-items {
@@ -87,16 +56,35 @@
     text-decoration: none;
 }
 
-/* Modal Functionality */
+/* Media queries */
 
-.left {
-    transform: translateX(-100%);
-}
+@media (max-width: 480px) {
+    .display-option {
+        height: 600px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        
+        transition: transform 1s ease-in-out;
+        background: url("../images/guitar.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: -100px;
+    }
 
-.right {
-    transform: translateX(100%);
-}
+    .display-title {
+        width: 300px;
+        padding: 0 20px;
+    }
 
-.invisible {
-    display: none;
+    .display-paragraph {
+        width: 300px;
+        padding: 0 20px;
+    }
+
+    .display-link {
+        margin: 0.5px 20px;
+    }
 }

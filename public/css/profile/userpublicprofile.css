@@ -1,6 +1,7 @@
 .main {
     display: grid;
     grid-template-columns: 1fr 4fr;
+    padding: 50px 100px;
 }
 
 .main-options {
@@ -11,4 +12,33 @@
 .main-options a {
     text-decoration: none;
     color: black;
+}
+
+.usertab-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    background-color: #520e7d;
+    padding: 0 10px;
+    margin: 10px 0;
+}
+
+.usertab-div a {
+    color: white;
+}
+
+.container-wrapper {
+    padding: 2rem 5rem;
+}
+
+/* Media queries */
+
+@media (max-width: 480px) {
+    .main {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        padding: 20px;
+    }
 }

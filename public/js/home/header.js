@@ -1,53 +1,34 @@
-let headerListLinkSignUp = document.querySelector(".header-option-sign-up");
-let headerListLinkSignIn = document.querySelector(".header-option-sign-in");
-let signoutButton = document.querySelector(".signout-button");
-let profileLink = document.querySelector(".profile-link");
+let headerListLinkSignUp = document.querySelectorAll(".header-option-sign-up");
+let headerListLinkSignIn = document.querySelectorAll(".header-option-sign-in");
+let signoutLink = document.querySelectorAll(".signout-link");
+let profileLink = document.querySelectorAll(".profile-link");
 
+for (let i = 0; i < 2; i++) {
+    // Initial access
+    if (getToken().length > 30) {
+        // User is logged in
+        headerListLinkSignUp[i].classList.add("invisible");
+        headerListLinkSignIn[i].classList.add("invisible");
+        signoutLink[i].classList.remove("invisible");
+        profileLink[i].classList.remove("invisible");
 
-function getToken() {
-    return window.location.href.split("/")[window.location.href.split("/").length - 1];
-}
-
-// Initial access
-if (getToken().length > 30) {
-    // User is logged in
-    headerListLinkSignUp.classList.add("invisible");
-    headerListLinkSignIn.classList.add("invisible");
-    signoutButton.classList.remove("invisible");
-    profileLink.classList.remove("invisible");
-
-    // Get User
-    getUserName().then(name => {
-        profileLink.innerHTML = name
-        profileLink.href = "/profile/activity/summary/" + getToken();
-    }).catch(e => {
-        alert(e);
-    })
-} else {
-    // User is logged out
-    headerListLinkSignUp.classList.remove("invisible");
-    headerListLinkSignIn.classList.remove("invisible");
-    signoutButton.classList.add("invisible");
-    profileLink.classList.add("invisible");
-}
-
-// Signout
-signoutButton.addEventListener("click", () => {
-    let token;
-
-    let slashCount = 0;
-    for (let i = 0; i < window.location.href.length; i++) {
-        if (window.location.href[i] == "/") {
-            slashCount += 1;
-        }
-        if (slashCount == 4) {
-            token = window.location.href.slice(i + 1);
-            break;
-        }
+        profileLink[i].innerHTML = "PROFILE"
+        profileLink[i].href = "/profile/activity/createnewtab/" + getToken();
+    } else {
+        // User is logged out
+        headerListLinkSignUp[i].classList.remove("invisible");
+        headerListLinkSignIn[i].classList.remove("invisible");
+        signoutLink[i].classList.add("invisible");
+        profileLink[i].classList.add("invisible");
     }
-    console.log(token)
-    window.location.href = "/signoutuser/" + token;
-})
+
+    // Signout
+    signoutLink[i].addEventListener("click", () => {
+        window.location.href = "/signoutuser/" + getToken();
+    })
+}
+
+
 
 // Access user profile
 async function getUserName() {
@@ -59,3 +40,38 @@ async function getUserName() {
     return response.name
 }
 
+function getToken() {
+    return window.location.href.split("/")[window.location.href.split("/").length - 1];
+}
+
+// Hamburger
+
+let hamburger = document.querySelector(".hamburger");
+let headerOptions = document.querySelector(".header-options");
+let headerOptionsMobile = document.querySelector(".header-options-mobile");
+let headerOptionsMobileExit = document.querySelector(".header-options-mobile-exit");
+const container = document.querySelector(".container");
+
+hamburger.addEventListener("click", () => {
+    headerOptionsMobile.classList.remove("invisible")
+    headerOptionsMobile.classList.remove("hide");
+})
+
+headerOptionsMobileExit.addEventListener("click", () => {
+    headerOptionsMobile.classList.add("invisible")
+    headerOptionsMobile.classList.add("hide");
+})
+
+// Container client width
+
+/*if (container.clientWidth <= 480) {
+    headerOptions.classList.add("invisible");
+    headerOptionsMobile.classList.remove("invisible")
+    headerOptionsMobile.classList.add("hide")
+}
+
+if (container.clientWidth >= 1000) {
+    headerOptions.classList.remove("invisible");
+    headerOptionsMobile.classList.add("invisible")
+    headerOptionsMobile.classList.remove("hide")
+}*/

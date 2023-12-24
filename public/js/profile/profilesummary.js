@@ -50,33 +50,12 @@ async function createUserItemsTags(userItems) {
         userItemsWrapper.classList.add("useritem-wrapper");
         userItemDiv.appendChild(userItemsWrapper);
 
-        if (userItems[i].received == false) {      
-            let userItemsReceivedButton = document.createElement("button");
-            userItemsReceivedButton.innerHTML = "I have received the item";
-            userItemDiv.appendChild(userItemsReceivedButton);
-
-            userItemsReceivedButton.addEventListener("click", (e) => {
-                userItemDiv.removeChild(userItemsReceivedButton);
-                let userItemReceived = document.createElement("h3");
-                userItemReceived.innerHTML = "Received Item";
-                userItemDiv.appendChild(userItemReceived);
-                updateItemReceivedTotrue(userItems[i]._id );
-                
-            })
-            
-        } else {
-            let userItemReceived = document.createElement("h3");
-            userItemReceived.innerHTML = "Received Item";
-            userItemDiv.appendChild(userItemReceived);
-        }
-        
-
         userItemDiv.classList.add("useritem-div");
-        displayUserItems(userItemDiv);
+        displayUserTabs(userItemDiv);
     }
 }
 
-function displayUserItems(userItemsDiv) {
+function displayUserTabs(userItemsDiv) {
     mainDisplay.appendChild(userItemsDiv);
 }
 
@@ -91,16 +70,6 @@ async function getItemImage(itemId) {
         return body;
     } )
     return response
-}
-
-async function updateItemReceivedTotrue(item_id) {
-    const response = await fetch("/updateitemreceivedtotrue/" + item_id + "/" + getToken(), {
-        method: 'PATCH',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' }
-    }) // output the status and return response
-    .then(res => res.json());
-    return response;
 }
 
 getPurchasedItems().then(purchasedItems => {

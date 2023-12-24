@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Nile</title>
+    <title>Dromeda Tabs</title>
     <link rel="stylesheet" href="../css/universal.css">
     <link rel="stylesheet" href="../css/display.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="/css/profile/itemsdisplay.css">
-    <link rel="stylesheet" href="/css/personalizeditem.css">
-    <link rel="stylesheet" href="/css/popularitem.css">
+    <link rel="stylesheet" href="/css/tabsearch.css">
+    <link rel="stylesheet" href="/css/personalizedtabs.css">
+    <link rel="stylesheet" href="/css/populartabs.css">
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/minidisplay.css">
@@ -21,77 +22,58 @@
   <body>
     <div class="container">
       <header class="header">
-        <h3><a class="header-title" href="">Nile</a></h3>
+        <h3><a class="header-title" href="">Dromeda</a></h3>
         <div class="search-box">
             <input class="header-search-box-input" type="text" placeholder="Search Nile">
-            <a href="" class="header-search-box-search-button">Search</a>
+            <a href="" class="header-search-box-search-button"><i class="fa-solid fa-magnifying-glass header-search-box-search-button"></i></a>
+        </div>
+        <div class="hamburger">
+          <div class="hamburger-bun"></div>
+          <div class="hamburger-bun"></div>
+          <div class="hamburger-bun"></div>
         </div>
         <ul class="header-options">
             <a class="profile-link" href=""></a>
-            <li class="header-option"><a href="/signin" class="header-option-sign-in">Sign In</a></li>
-            <li class="header-option"><a href="/signup" class="header-option-sign-up">Sign Up</a></li>
-            <button class="signout-button">Sign Out</button>
+            <li class="header-option"><a href="/signin" class="header-option-sign-in">SIGN IN</a></li>
+            <li class="header-option"><a href="/signup" class="header-option-sign-up">SIGN UP</a></li>
+            <button class="signout-link" href="">SIGN OUT</button>
+        </ul>
+        <ul class="header-options-mobile invisible hide">
+            <button class="header-options-mobile-exit">X</button>
+            <a class="profile-link" href=""></a>
+            <li class="header-option"><a href="/signin" class="header-option-sign-in">SIGN IN</a></li>
+            <li class="header-option"><a href="/signup" class="header-option-sign-up">SIGN UP</a></li>
+            <button class="signout-link" href="">SIGN OUT</button>
         </ul>
       </header>
 
       <section class="display">
-        <div class="display-option display-option-one left">
-          <h3 class="display-title">Get Your Marry Deals</h3>
-          <p class="display-paragraph">The holiday season is coming around the corner! Don't miss out on these opportunities!</p>
-          <button class="display-link">Get Deals</button>
-          <div class="display-control">
-            <button type="button" class="display-left"><</button>
-            <button type="button" class="display-right">></button>
-          </div>
-        </div>
-        <div class="display-option display-option-two">
-          <h3 class="display-title">Offical Nile Store</h3>
-          <p class="display-paragraph">We have tons of cool items here at Nile!</p>
-          <button class="display-link">Be Cool</button>
-          <div class="display-control">
-            <button type="button" class="display-left"><</button>
-            <button type="button" class="display-right">></button>
-          </div>
-        </div>
-        <div class="display-option display-option-three right">
-          <h3 class="display-title display-title-popular-items">Popular Items</h3>
-          <p class="display-paragraph display-paragraph-popular-items">Don't know what to buy? These items have been quite popular recently!</p>
-          <button class="display-link">Shop Now</button>
-          <div class="display-control">
-            <button type="button" class="display-left"><</button>
-            <button type="button" class="display-right">></button>
-          </div>
+        <div class="display-option">
+          <h3 class="display-title">Get <span>guitar</span> tabs</h3>
+          <p class="display-paragraph">Learn a song or create and share your own tabs!</p>
+          <button class="display-link">Browse By Category</button>
         </div>
       </section>
 
-      <section class="personalized-items-display">
-        <h3 class="personalized-items-display-title invisible">Based On Your Recent Searches</h3> 
-        <div class="personalized-items-display-grid"></div>
+      <section class="personalized-tabs-display">
+        <h3 class="personalized-tab-display-title invisible">Based On Your Recent Searches</h3> 
       </section>
 
-      <section class="popular-items-display">
-        <h3 class="popular-items-display-title invisible">Popular Items</h3> 
-        <div class="popular-items-display-grid"></div>
-      </section>
-
-      <section class="mini-display">
-        <h3 class="display-title mini-display-title">Shop Luxury</h3>
-        <p class="display-paragraph mini-display-paragraph">We have designer jewelry here!</p>
-        <button class="display-link">Get Luxorious</button>
+      <section class="popular-tabs-display">
+        <h3 class="popular-tab-display-title invisible">Popular Tabs</h3> 
       </section>
 
       <footer>
-        <h3><a class="header-title" href="">Nile</a></h3>
-        <p>@ *Fake* Copyright 2023 Nile</p>
+        <h3><a class="header-title" href="">Dromeda Tabs</a></h3>
       </footer>
 
     </div>
-    <script src="/js/home/home.js"></script>
     <script src="/js/home/hometitle.js"></script>
     <script src="/js/home/header.js"></script>
     <script src="/js/home/display.js"></script>
     <script src="/js/search.js"></script>
-    <script src="/js/home/personalizeditems.js"></script>
-    <script src="/js/home/popularitems.js"></script>
+    <script src="/js/home/personalizedtabs.js"></script>
+    <script src="/js/home/populartabs.js"></script>
+    <script src="https://kit.fontawesome.com/d5f4e05c7d.js" crossorigin="anonymous"></script>
   </body>
 </html>

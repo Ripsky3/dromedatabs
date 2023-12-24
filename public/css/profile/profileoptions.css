@@ -22,3 +22,11 @@ hr {
     text-decoration-thickness: 1px;
 
 }
+
+/* Media queries */
+
+@media (max-width: 480px) {
+    .profile-options {
+
+    }
+}

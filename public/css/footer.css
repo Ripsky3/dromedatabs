@@ -2,12 +2,18 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1c1c1c;
-    padding: 1rem;
-    margin-top: 50px;
-
+    padding: 0 200px;
+    background-color: #520e7d;
 }
 
 footer p {
     color: white;
+}
+
+/* Media queries */
+
+@media (max-width: 480px) {
+    footer {
+        padding: 0 20px;
+    }
 }

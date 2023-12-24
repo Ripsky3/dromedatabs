@@ -62,7 +62,6 @@ async function trashMessage(messageId) {
 }
 
 getSentMessages().then(messages => {
-    console.log(messages)
     createUserItemsTags(messages);
 }).catch(e => {
     alert(e)

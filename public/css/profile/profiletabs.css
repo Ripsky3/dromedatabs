@@ -1,0 +1,72 @@
+.container-wrapper {
+    padding: 2rem 5rem;
+}
+
+.tabs-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #520e7d;
+    padding: 2rem;
+}
+
+.tabs-info-wrapper {
+    display: flex;
+}
+
+.tabs-info-wrapper-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 1rem;
+}
+
+.tabs-info-wrapper-wrapper h3 {
+    color: white;
+    font-size: 2rem;
+    margin: 0;
+}
+
+.tabs-info-link {
+    text-decoration: none;
+    color: white;
+}
+
+.tabs-info-link:hover {
+    text-decoration: underline;
+}
+
+.tabs-info-day-total {
+    color: white;
+}
+
+.list-item-link {
+    margin: 0;
+    padding: 1rem;
+    background-color: white;
+    color: black;
+    font-family: "Poppins", sans-serif;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.main-display-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.create-new-tab-link {
+    margin: 0;
+    padding: 4px 6px;
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}

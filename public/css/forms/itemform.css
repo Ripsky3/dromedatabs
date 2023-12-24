@@ -9,9 +9,8 @@
     align-items: center;
     align-self: center;
     width: 25%;
-    background-color: #1c1c1c;
-    border: 0.1rem solid rgb(60, 108, 249);
-    padding: 1rem;
+    background-color: #520e7d;
+    padding: 20px 75px;
     margin: 2rem;
 }
 
@@ -19,19 +18,24 @@
     color: white;
 }
 
+.item-form input {
+    width: 400px;
+    font-family: "Poppins", sans-serif;
+    outline: none;
+}
+
 .item-wrapper {
+    display: flex;
+    flex-direction: column;
     margin: 0.7rem 0;
 }
 
-.item-image-input {
-    color: white;
-}
-
 .item-form button {
+    width: 400px;
     margin: 0;
-    padding: 1rem;
-    background-color: rgb(60, 108, 249);
-    color: white;
+    padding: 10px;
+    background-color: white;
+    color: black;
     font-family: "Poppins", sans-serif;
     border: none;
     cursor: pointer;
@@ -45,4 +49,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.tab-category-select {
+    width: 400px;
+    font-family: "Poppins", sans-serif;
+    outline: none;
 }

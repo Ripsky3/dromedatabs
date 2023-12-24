@@ -66,9 +66,9 @@ router.post("/createitem/:token", auth, upload.single("itemFile"), async (req, r
     }
 })
 
-router.get("/createitemerror/:error/:token", auth, async (req, res) => {
+/*router.get("/createitemerror/:error/:token", auth, async (req, res) => {
     res.render("createitemerror");
-})
+})*/
 
 
 router.get("/getallitems/:token", auth, async (req, res) => {
@@ -143,13 +143,6 @@ router.delete("/deleteuseritem/:item_id/:token", auth, async (req, res) => {
     }
 })
 
-router.get("/itemsearch/:searchinput/:token", auth, async (req, res) => {
-    res.render("itemsearch");
-})
-
-router.get("/itemsearchguest/:searchinput", async (req, res) => {
-    res.render("itemsearchguest");
-})
 
 router.get("/item/:item_id", async (req, res) => {
     res.render("itemnoauth");
@@ -247,61 +240,6 @@ function _arrayBufferToBase64( buffer ) {
     }
     return window.btoa( binary );
 }
-
-router.patch("/updatetopsearch/:id", async (req, res) => {
-    try {
-        const item = await Item.findById(req.params.id);
-        item.topsearch += 1;
-        item.save();
-        res.send(item);
-    } catch (e) {   
-        res.send({error: "Can't update top search"});
-    }
-})
-
-router.get("/getpopularitems", async (req, res) => {
-    try {
-        const items = await Item.find({});
-        const sortedItems = [];
-        let maxIndexArr = [];
-        
-        for (let i = 0; i < items.length - 1; i++) {
-            let tempMax = 0;
-            let tempMaxIndex;
-            for (let j = i; j < items.length; j++) {
-                /*console.log("///////////////")
-                console.log(items[i].name);
-                console.log(items[j].name);
-                console.log("///////////////")*/
-                let tempMaxIndexAlreadyUsed = false;
-                if (items[j].topsearch > tempMax) {
-                    /*console.log("///////////////")
-                    console.log(items[j].name);
-                    console.log("///////////////")*/
-                    for (let x = 0; x < maxIndexArr.length; x++) {
-                        if ( maxIndexArr[x] == j ) {
-                            
-                            tempMaxIndexAlreadyUsed = true;
-                        }
-                    }
-                    if (!tempMaxIndexAlreadyUsed) {
-                        tempMax = items[j].topsearch;
-                        tempMaxIndex = j;
-                        //console.log("New temp max: " + items[j].name)
-                    }      
-                }
-            }
-            //console.log("Finished loop")
-            sortedItems.push(items[tempMaxIndex]);
-            maxIndexArr.push(tempMaxIndex);
-            
-        }
-
-        res.send(sortedItems.splice(0, 4));
-    } catch (e) {   
-        res.status(404).send("can't find");
-    }
-})
 
 router.get("/getusercartitems/:token", auth, async (req, res) => {
     try {

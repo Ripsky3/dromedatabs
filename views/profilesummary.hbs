@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Nile</title>
+    <title>Dromeda Tabs</title>
     <link rel="stylesheet" href="/css/universal.css">
     <link rel="stylesheet" href="/css/display.css">
     <link rel="stylesheet" href="/css/header.css">
@@ -19,12 +19,30 @@
   </head>
   <body>
     <div class="container">
-        <header class="header">
-          <h3><a class="header-title" href="">Nile</a></h3>
-          <ul class="header-options">
-              <a class="home-link" href="">Go Home</a>
-              <button class="signout-button">Sign Out</button>
-          </ul>
+      <header class="header">
+        <h3><a class="header-title" href="">Dromeda</a></h3>
+        <div class="search-box">
+            <input class="header-search-box-input" type="text" placeholder="Search Nile">
+            <a href="" class="header-search-box-search-button"><i class="fa-solid fa-magnifying-glass header-search-box-search-button"></i></a>
+        </div>
+        <div class="hamburger">
+          <div class="hamburger-bun"></div>
+          <div class="hamburger-bun"></div>
+          <div class="hamburger-bun"></div>
+        </div>
+        <ul class="header-options">
+            <a class="profile-link" href=""></a>
+            <li class="header-option"><a href="/signin" class="header-option-sign-in">SIGN IN</a></li>
+            <li class="header-option"><a href="/signup" class="header-option-sign-up">SIGN UP</a></li>
+            <button class="signout-link" href="">SIGN OUT</button>
+        </ul>
+        <ul class="header-options-mobile invisible hide">
+            <button class="header-options-mobile-exit">X</button>
+            <a class="profile-link" href=""></a>
+            <li class="header-option"><a href="/signin" class="header-option-sign-in">SIGN IN</a></li>
+            <li class="header-option"><a href="/signup" class="header-option-sign-up">SIGN UP</a></li>
+            <button class="signout-link" href="">SIGN OUT</button>
+        </ul>
       </header>
       <div class="container-wrapper"> 
         <div class="profile-options">
@@ -39,9 +57,10 @@
 
         <div class="main">
           <div class="main-options">
-            <a href="" class="main-option main-option-summary">Summary</a>
-            <a href="" class="main-option main-option-selling">Selling</a>
-            <a href="" class="main-option main-option-cart">Cart</a>
+            <a href="" class="main-option main-option-tabs">Create Tab</a>
+            <a href="" class="main-option main-option-drafted-tabs">Drafted Tabs</a>
+            <a href="" class="main-option main-option-posted-tabs">Posted Tabs</a>
+            <a href="" class="main-option main-option-bookmarked-tabs">Bookmarked Tabs</a>
           </div>
           <div class="main-display">
             <h3 class="main-display-title">Purchased</h3>
@@ -50,7 +69,7 @@
         </div>
       </div>
     </div>
-    
+    <script src="/js/home/header.js"></script>
     <script src="/js/homelink.js"></script>
     <script src="/js/home/hometitle.js"></script>
     <script src="/js/signout.js"></script>
@@ -58,5 +77,10 @@
     <script src="/js/profile/sellingbutton.js"></script>
     <script src="/js/profile/publicprofilelink.js"></script>
     <script src="/js/profile/cartlink.js"></script>
+    <script src="/js/profile/tabslink.js"></script>
+    <script src="/js/profile/draftedtabslink.js"></script>
+    <script src="/js/profile/postedtabslink.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="https://kit.fontawesome.com/d5f4e05c7d.js" crossorigin="anonymous"></script>
   </body>
 </html>

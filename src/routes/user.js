@@ -6,7 +6,7 @@ const auth = require("../middleware/auth")
 
 
 router.get("", (req, res) => {
-    res.status(200).render("home");
+    res.render("home");
 })
 
 router.get("/home", async (req, res) => {
@@ -26,37 +26,29 @@ router.get("/signin", (req, res) => {
 })
 
 router.get("/error/:error", (req, res) => {
-    //console.log(req.params.error)
     res.render("error");
 })
 
 router.post("/createuser", async (req, res) => {
     let user;
-    console.log(1)
-    console.log(req.body)
-    if (req.body.latitude && req.body.longitude) {
-        user = new User({
-            name: req.body.username,
-            email: req.body.email,
-            password: req.body.password,
-            address: {latitude: req.body.latitude, longitude: req.body.longitude}
-        }) 
-    } else {
-        user = new User({
-            name: req.body.username,
-            email: req.body.email,
-            password: req.body.password
-        }) 
-    }
-    
+
+    user = new User({
+        name: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+    }) 
     
     try {
         const token = await user.generateAuthToken();
         await user.save();
         res.status(201).send({token: token});
     } catch (e) {
-        if (e.message.includes("duplicate")) {
-            res.status(500).send({error: "Credential already exist"});
+        if (e.message.includes("email")) {
+            res.status(500).send({error: "Email already exist"});
+        } else if (e.message.includes("name")) {
+            res.status(500).send({error: "Name already exist"});
+        } else if (e.message.includes("password")) {
+            res.status(500).send({error: "Password must be at least 7 characters long"});
         } else {
             res.status(500).send({error: "Make sure to enter valid information in all boxes"});
         }
@@ -65,7 +57,7 @@ router.post("/createuser", async (req, res) => {
 
 router.post("/signinuser", async (req, res) => {
     try {
-        const user = await User.getUserByCredentials(req.body.email, req.body.password);
+        const user = await User.getUserByCredentials(req.body.name, req.body.email, req.body.password);
         const token = await user.generateAuthToken();
         await user.save();
         
@@ -103,32 +95,27 @@ router.get("/profile/activity/summary/:token", auth, async (req, res) => {
     res.render("profilesummary");
 })
 
-router.get("/profile/activity/selling/:token", auth, async (req, res) => {
-    res.render("profileselling");
-})
-
-router.get("/profile/activity/selling/listitemform/:token", auth, async (req, res) => {
-    res.render("listitemform");
-})
-
-router.get("/profile/activity/selling/active/:token", auth, async (req, res) => {
-    res.render("profilesellingactive");
-})
-
-router.get("/profile/activity/selling/sold/:token", auth, async (req, res) => {
-    res.render("profilesellingsold");
-})
-
-router.get("/profile/activity/selling/buyerreceived/:token", auth, async (req, res) => {
-    res.render("profilesellingbuyerreceived");
-})
-
 router.get("/profile/activity/cart/:token", auth, async (req, res) => {
     res.render("profilecart");
 })
 
 router.get("/profile/activity/cart/checkout/:token", auth, async (req, res) => {
     res.render("profilecheckout");
+})
+
+router.get("/profile/activity/createnewtab/:token", auth, async (req, res) => {
+    res.render("profiletabscreatenewtab");
+})
+router.get("/profile/activity/draftedtabs/:token", auth, async (req, res) => {
+    res.render("profiledraftedtabs");
+})
+
+router.get("/profile/activity/postedtabs/:token", auth, async (req, res) => {
+    res.render("profilepostedtabs");
+})
+
+router.get("/profile/activity/bookmarkedtabs/:token", auth, async (req, res) => {
+    res.render("profilebookmarkedtabs");
 })
 
 router.get("/profile/account/:token", auth, async (req, res) => {
@@ -283,6 +270,61 @@ router.get("/getuserfrom_id/:user_id/:token", auth, async (req, res) => {
     }
 })
 
+router.patch("/bookmarktab/:tab_id/:token", auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        user.bookmarks.push(req.params.tab_id);
+        user.save();
+    } catch(e) {
+        res.send({error: "Could not bookmark"});
+    }
+})
+
+router.patch("/unbookmarktab/:tab_id/:token", auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        for (let i = 0; i < user.bookmarks.length; i++) {
+            if (user.bookmarks[i] == req.params.tab_id) {
+                user.bookmarks.splice(i, 1);
+            }
+        }
+        user.save();
+    } catch(e) {
+        res.send({error: "Could not bookmark"});
+    }
+})
+
+router.get("/tabisbookmarked/:tab_id/:token", auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        for (let i = 0; i < user.bookmarks.length; i++) {
+            if (user.bookmarks[i] == req.params.tab_id) {
+                return res.send(true);
+            }
+        }
+        res.send(false);
+    } catch(e) {
+        res.send({error: "Could not bookmark"});
+    }
+})
+
+router.get("/getuserbytabowner_id/:tabowner_id/:token", auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.params.tabowner_id);
+        res.send(user);
+    } catch(e) {
+        res.send({error: "Could not tab owner"});
+    }
+})
+
+router.get("/getuserbytabowner_idnoauth/:tabowner_id", async (req, res) => {
+    try {
+        const user = await User.findById(req.params.tabowner_id);
+        res.send(user);
+    } catch(e) {
+        res.send({error: "Could not tab owner"});
+    }
+})
 
 module.exports = {
     userRouter: router

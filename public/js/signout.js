@@ -1,6 +1,6 @@
-let signoutButton = document.querySelector(".signout-button");
+let signoutLink = document.querySelector(".signout-link");
 
-signoutButton.addEventListener("click", () => {
+signoutLink.addEventListener("click", () => {
     window.location.href = "/signoutuser/" + getToken();
 })
 

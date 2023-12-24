@@ -12,3 +12,12 @@
     text-decoration: none;
     color: black;
 }
+
+/* Media queries */
+
+@media (max-width: 480px) {
+    .main {
+        display: flex;
+        flex-direction: column;
+    }
+}

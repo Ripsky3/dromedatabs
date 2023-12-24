@@ -1,4 +1,9 @@
 const deleteAccountButton = document.querySelector(".delete-account-button");
+const sellingLink = document.querySelector(".main-option-selling");
+const ratingsLink = document.querySelector(".main-option-ratings");
+
+sellingLink.href = "/userpublicprofile/" + getToken();
+ratingsLink.href = "/userpublicprofileratings/" + getToken();
 
 deleteAccountButton.addEventListener("click", () => {
     deleteAccount().then(res => {

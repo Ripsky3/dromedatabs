@@ -6,3 +6,9 @@
     display: flex;
     justify-content: space-between;
 }
+
+@media (max-width: 480px) {
+    .container-wrapper {
+        padding: 20px;
+    }
+}

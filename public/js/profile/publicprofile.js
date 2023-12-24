@@ -3,18 +3,22 @@ const publicProfileTitle = document.querySelector(".public-profile-title");
 
 publicProfileTitle.innerHTML = "Public profile: " + getPublicProfileName();
 
-
 function getToken() {
     return window.location.href.split("/")[window.location.href.split("/").length - 1];
 }
-
 
 function getPublicProfileName() {
     return window.location.href.split("/")[window.location.href.split("/").length - 2];
 }
 
-async function getUserItems() {
-    const response = await fetch("/getpublicuseritems/" + getPublicProfileName(), {
+
+
+function getToken() {
+    return window.location.href.split("/")[window.location.href.split("/").length - 1];
+}
+
+async function getPublicUserTabsPosted() {
+    const response = await fetch("/getpublicusertabsposted/" + getPublicProfileName() + "/" + getToken(), {
         method: 'GET',
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' }
@@ -22,71 +26,30 @@ async function getUserItems() {
     return response
 }
 
-async function createUserItemsTags(userItems) {
-    for (let i = 0; i < userItems.length; i++) {
-        if (userItems[i].purchased == false) {
-            let userItemDiv = document.createElement("div");
+async function createUserTabsTags(userTabs) {
+    for (let i = 0; i < userTabs.length; i++) {
+        let userTabDiv = document.createElement("div");
+        userTabDiv.classList.add("usertab-div");
 
-            let itemImage = document.createElement("img");
-            itemImage = await getItemImage(userItems[i]._id).then(res => {
-                itemImage.src = "data:image/jpg;base64," + res;
-                itemImage.classList.add("item-image");
-                userItemDiv.appendChild(itemImage);
-            })
+        let userTabName = document.createElement("a");
+        userTabName.innerHTML = userTabs[i].name;
+        userTabName.href = "/publicprofiletabpage/" + userTabs[i]._id + "/" + getToken();
+        let userTabCategory = document.createElement("p");
+        userTabCategory.innerHTML = userTabs[i].category;
 
-            //Middle
-            let userItemsWrapper = document.createElement("div");
-            let userItemName = document.createElement("a");
-            userItemName.innerHTML = userItems[i].name;
-            userItemName.href = "/item/" + userItems[i]._id + "/" + getToken();
-            let userItemDescription = document.createElement("p");
-            userItemDescription.innerHTML = userItems[i].description;
-            let userItemPrice = document.createElement("h3");
-            userItemPrice.innerHTML = userItems[i].price;
-            userItemsWrapper.appendChild(userItemName);
-            userItemsWrapper.appendChild(userItemDescription);
-            userItemsWrapper.appendChild(userItemPrice);
-            userItemsWrapper.classList.add("useritem-wrapper");
+        userTabDiv.appendChild(userTabName);
+        userTabDiv.appendChild(userTabCategory);
 
-
-            userItemDiv.appendChild(userItemsWrapper);
-
-            userItemDiv.classList.add("useritem-div");
-
-            displayUserItems(userItemDiv);
-        }
+        displayUserTabs(userTabDiv);
     }
 }
 
-function displayUserItems(userItemsDiv) {
-    itemDisplay.appendChild(userItemsDiv);
+function displayUserTabs(userTabDiv) {
+    itemDisplay.appendChild(userTabDiv);
 }
 
-
-async function deleteUserItem(itemName) {
-    const response = await fetch("/deleteuseritem/" + itemName + "/" + getToken(), {
-        method: 'DELETE',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' }
-    }).then(res => res.json());
-    return response
-}
-
-async function getItemImage(itemId) {
-    const response = await fetch("/getitemimage/" + itemId , {
-        method: 'GET',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' }
-    }) // output the status and return response
-    .then(response => response.text()) // send response body to next then chain
-    .then(body => {
-        return body;
-    } )
-    return response
-}
-
-getUserItems().then(userItems => {
-    createUserItemsTags(userItems);
+getPublicUserTabsPosted().then(userTabs => {
+    createUserTabsTags(userTabs);
 }).catch(e => {
     console.log(e)
 })

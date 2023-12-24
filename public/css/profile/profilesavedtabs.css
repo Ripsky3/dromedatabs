@@ -1,0 +1,30 @@
+.usertab-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    background-color: #520e7d;
+    padding: 0 10px;
+    margin: 10px 0;
+}
+
+.usertab-div a {
+    color: white;
+}
+
+.container-wrapper {
+    padding: 2rem 5rem;
+}
+
+.usertab-div-extra-padding {
+    padding: 10px;
+}
+
+/* Media queries */
+
+
+@media (max-width: 480px) {
+    .container-wrapper {
+        padding: 20px;
+    }
+}
